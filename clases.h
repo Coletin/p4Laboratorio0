@@ -1,0 +1,5 @@
+
+class Habitacion{
+   public:
+    Habitacion();
+};
