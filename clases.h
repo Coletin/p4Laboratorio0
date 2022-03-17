@@ -1,4 +1,5 @@
 #include <iostream>
+#include "tipos.h"
 using namespace std;
 
 class Habitacion{
