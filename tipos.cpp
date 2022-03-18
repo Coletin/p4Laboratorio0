@@ -134,7 +134,7 @@ DTHuesped::DTHuesped(){
 
 DTHuesped::DTHuesped(string nombree, string emaile, bool esFingere){
     this->nombre = nombree;
-    this->emaile = emaile;
+    this->email = emaile;
     this->esFinger = esFingere;
 };
 
