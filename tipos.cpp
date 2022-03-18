@@ -24,7 +24,7 @@ int DTFecha::getAnio(){
 };
 
 bool DTFecha::operator==(const DTFecha& igual){
-    return (this->dia = igual.dia)&&(this->mes = igual.mes)&&(this->anio = igual.anio);
+    return (this->dia == igual.dia)&&(this->mes == igual.mes)&&(this->anio == igual.anio);
 };
 
 bool DTFecha::operator!=(const DTFecha& distinta){
@@ -70,7 +70,7 @@ bool DTFecha::operator<=(const DTFecha& maIgual){
     else if((this->dia < maIgual.dia)&&(this->mes == maIgual.mes)&&(this->anio == maIgual.anio)){
         mayor = true;
     };
-    bool igual = (this->dia = maIgual.dia)&&(this->mes = maIgual.mes)&&(this->anio = maIgual.anio);
+    bool igual = (this->dia == maIgual.dia)&&(this->mes == maIgual.mes)&&(this->anio == maIgual.anio);
     return mayor||igual;
 };
 
@@ -85,7 +85,7 @@ bool DTFecha::operator>=(const DTFecha& meIgual){
     else if((this->dia > meIgual.dia)&&(this->mes == meIgual.mes)&&(this->anio == meIgual.anio)){
         menor = true;
     };
-    bool igual = (this->dia = meIgual.dia)&&(this->mes = meIgual.mes)&&(this->anio = meIgual.anio);
+    bool igual = (this->dia == meIgual.dia)&&(this->mes == meIgual.mes)&&(this->anio == meIgual.anio);
     return menor||igual;
 };
 
@@ -127,4 +127,4 @@ istream& operator>>(istream& i, DTFecha& f){
     DTFecha nueva(diaN, mesN, anioN);
     f = nueva;
     return i;
-}
+};
