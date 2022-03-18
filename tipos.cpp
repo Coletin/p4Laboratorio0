@@ -2,6 +2,9 @@
 #include <iostream>
 using namespace std;
 
+DTFecha::DTFecha(){
+};
+
 DTFecha::DTFecha(int dian, int mesn, int anion){
     this->dia = dian;
     this->mes = mesn;
