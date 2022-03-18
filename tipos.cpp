@@ -126,4 +126,5 @@ istream& operator>>(istream& i, DTFecha& f){
     int anioN = stoi(anioS);
     DTFecha nueva(diaN, mesN, anioN);
     f = nueva;
+    return i;
 }
