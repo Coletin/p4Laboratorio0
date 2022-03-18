@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "tipos.h"
 using namespace std;
 
@@ -44,6 +45,7 @@ class ReservaIndividual : public Reserva{
 
 class Sistema{
     public:
+     Sistema();
      void agregarHuesped(string nombre, string email, bool esFinger);
 
 };

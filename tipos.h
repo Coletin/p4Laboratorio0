@@ -1,5 +1,16 @@
-class DTHuesped{
+#include <string>
 
+class DTHuesped{
+    private:
+     string nombre;
+     string email;
+     bool esFinger;
+    public:
+     DTHuesped();
+     DTHuesped(string, string, bool);
+     string getNombre();
+     string getEmail();
+     bool getEsFinger();     
 };
 
 class DTHabitacion{

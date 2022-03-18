@@ -128,3 +128,24 @@ istream& operator>>(istream& i, DTFecha& f){
     f = nueva;
     return i;
 };
+
+DTHuesped::DTHuesped(){
+};
+
+DTHuesped::DTHuesped(string nombree, string emaile, bool esFingere){
+    this->nombre = nombree;
+    this->emaile = emaile;
+    this->esFinger = esFingere;
+};
+
+string DTHuesped::getNombre(){
+    return this->nombre;
+};
+
+string DTHuesped::getEmail(){
+    return this->email;
+};
+
+bool DTHuesped::getEsFinger(){
+    return this->esFinger;
+};
