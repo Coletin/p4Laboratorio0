@@ -44,6 +44,6 @@ class ReservaIndividual : public Reserva{
 
 class Sistema{
     public:
-     void agregarHuesped(string nombre, string email, boolean esFinger);
+     void agregarHuesped(string nombre, string email, bool esFinger);
 
-}
+};
