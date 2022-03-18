@@ -41,3 +41,9 @@ class ReservaIndividual : public Reserva{
     public:
      virtual float calcularCosto();
 };
+
+class Sistema{
+    public:
+     void agregarHuesped(string nombre, string email, boolean esFinger);
+
+}
