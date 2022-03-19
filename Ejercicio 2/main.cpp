@@ -1,21 +1,17 @@
 #include<iostream>
-#include"A.h"
-#include"B.h"
-#include"C.h"
+#include"clases.h"
 using namespace std;
 
 
 
 int main(){
-    C c();
-    B b();
-    A a();
-    A a(2);
-    B b(2);
-    C c(18);
+ 
+A a(4,4,4);
+B b(5);     
+C c(7);
     a.printInt();
     b.printInt();
     c.printInt();
-    
+   
     return 0;   
 }
