@@ -4,79 +4,54 @@ using namespace std;
 class C;
 class B;
 
-
-
 class A
 {
 private:
     int a;
-    B ab;  
-    C ac;
-
 public:
-   A(){
-    a=0;
-   }
-    A(int a,int b, int c):ab(),ac()
+    B* ab;  
+    C* ac;
+    A(int na)
     {
-        this->a=a;
+        this->a=na;
     };
     void printInt(){
-         printf("%d \n",a);
-    }
+        cout << this->a << endl;
+    };
     ~A();
 };
 
 
 class C
 {
-    B* cb;
 private:
-
    int c;
 public:
-    C(){
-    c=0;
-    }
-    C(int c){
-    this->c=c;
-    }
-    C(int c):cb(){
-        this->c=c;
+    B* cb;
+    A* ca;
+    C(int nc){
+    this->c=nc;
     };
     void printInt(){
-            printf("%d \n",c);
+            cout << this->c << endl;
     }
     ~C();
 };
-
-
-
-
-
-
-
-
-
-
 
 
 class B
 {
 private:
    int b;
-
 public:
-   B(){
-       b=0;
-   }
-        B( int b)
-    {
-        this->b=b;
+    A* ba;
+    C* bc;
+    B(int nb){
+        this->b=nb;
     };
     void printInt(){
-             printf("%d \n",b);
-    }
+            cout<<this->b << endl;
+    };
     ~B();
 };
 

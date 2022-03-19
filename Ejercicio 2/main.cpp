@@ -5,13 +5,17 @@ using namespace std;
 
 
 int main(){
- 
-A a(4,4,4);
-B b(5);     
+B b(5);
+A a(4);
 C c(7);
-    a.printInt();
-    b.printInt();
-    c.printInt();
-   
-    return 0;   
+b.ba = &a;
+b.bc = &c;
+c.ca = &a;
+c.cb = &b;
+a.ab = &b;
+a.ac = &c;
+a.printInt();
+b.printInt();
+c.printInt();
+return 0;   
 }
