@@ -8,9 +8,9 @@ class A
 {
 private:
     int a;
-public:
     B* ab;  
     C* ac;
+public:
     A(int na)
     {
         this->a=na;
@@ -19,6 +19,18 @@ public:
         cout << this->a << endl;
     };
     ~A();
+    void setAC(C& acn){
+        this->ac = &acn;
+    };
+    C* getAC(){
+        return this->ac;
+    };
+    void setAB(B& abn){
+        this->ab = &abn;
+    };
+    B* getAB(){
+        return this->ab;
+    };
 };
 
 

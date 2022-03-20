@@ -8,14 +8,10 @@ int main(){
 B b(5);
 A a(4);
 C c(7);
-b.ba = &a;
-b.bc = &c;
-c.ca = &a;
-c.cb = &b;
-a.ab = &b;
-a.ac = &c;
+a.setAC(c);
+a.setAB(b);
 a.printInt();
-b.printInt();
-c.printInt();
+a.getAB()->printInt();
+a.getAC()->printInt();
 return 0;   
 }
