@@ -8,45 +8,32 @@ class A
 {
 private:
     int a;
-    B* ab;  
+    B* ab;
     C* ac;
 public:
-    A(int na)
-    {
-        this->a=na;
-    };
-    void printInt(){
-        cout << this->a << endl;
-    };
+    A(int na);
+    void printInt();
+    void setAC(C& acn);
+    C* getAC();
+    void setAB(B& abn);
+    B* getAB();
     ~A();
-    void setAC(C& acn){
-        this->ac = &acn;
-    };
-    C* getAC(){
-        return this->ac;
-    };
-    void setAB(B& abn){
-        this->ab = &abn;
-    };
-    B* getAB(){
-        return this->ab;
-    };
 };
 
 
 class C
 {
 private:
-   int c;
-public:
+    int c;
     B* cb;
     A* ca;
-    C(int nc){
-    this->c=nc;
-    };
-    void printInt(){
-            cout << this->c << endl;
-    }
+public:
+    C(int nc);
+    void printInt();
+    void setCA(A& can);
+    A* getCA();
+    void setCB(B& cbn);
+    B* getCB();
     ~C();
 };
 
@@ -54,35 +41,15 @@ public:
 class B
 {
 private:
-   int b;
-public:
+    int b;
     A* ba;
     C* bc;
-    B(int nb){
-        this->b=nb;
-    };
-    void printInt(){
-            cout<<this->b << endl;
-    };
+public:
+    B(int nb);
+    void printInt();
+    void setBA(A& ban);
+    A* getBA();
+    void setbc(C& bcn);
+    C* getBC();
     ~B();
 };
-
-
-
-
-
-
-
-A::~A(){
-};
-
-
-
-B::~B(){
-};
-
-
-
-C::~C(){
-};
-
