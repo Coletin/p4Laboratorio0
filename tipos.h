@@ -1,5 +1,10 @@
 #include <string>
 
+//Constantes predefinidas de letra
+const int MAX_HABITACIONES = 256;
+const int MAX_HUESPEDES = 256;
+const int MAX_RESERVAS = 256;
+
 class DTHuesped{
     private:
      string nombre;
@@ -14,7 +19,16 @@ class DTHuesped{
 };
 
 class DTHabitacion{
-
+    private:
+        int numero;
+        float precio;
+        int capacidad;
+    public:
+        DTHabitacion(); //PREGUNTA debemos tener constructor por defecto para los datatypes?
+        DTHabitacion(int, float, int);
+        int getNumero();
+        float getPrecio();
+        int getCapacidad();
 };
 
 enum EstadoReserva{

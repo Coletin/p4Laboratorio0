@@ -12,6 +12,13 @@ class Habitacion{
      int capacidad;
     public:
      Habitacion();
+     Habitacion(int, float, int);
+     int getNumero();
+     void setNumero(int _numero);
+     float getPrecio();
+     void setPrecio(float _precio);
+     int getCapacidad();
+     void setCapacidad(int _capacidad);
 };
 
 class Huesped{
