@@ -1,18 +1,13 @@
 #include "../clases.h"
-<<<<<<< Updated upstream
 #include <iostream>
 using namespace std;
 
-#define MAX_HUESPEDES 256;
-=======
 #include "../tipos.h"
 #include <stdexcept>
->>>>>>> Stashed changes
 
 Sistema::Sistema(){
 };
 
-<<<<<<< Updated upstream
 Sistema::agregarHuesped(string nombre, string email, bool esFinger){
     bool esta = false;
     bool final = false;
@@ -33,7 +28,6 @@ Sistema::agregarHuesped(string nombre, string email, bool esFinger){
     }
     
 }
-=======
 void agregarHabitacion(int numero, float precio, int capacidad){
     //chequeamos si los datos pasados son coerentes
     if(numero < 0)
@@ -73,4 +67,3 @@ DTHabitacion** obtenerHabitaciones(int& cantHabitaciones){
     }
     return respuesta;
 };
->>>>>>> Stashed changes

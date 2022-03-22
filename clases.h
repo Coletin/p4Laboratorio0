@@ -3,7 +3,7 @@
 #include "tipos.h"
 using namespace std;
 
-#define MAX_HUESPEDES 256;
+#define MAX_HUESPEDES 256
 
 class Habitacion{
     private:
@@ -56,7 +56,7 @@ class ReservaIndividual : public Reserva{
 
 class Sistema{
     private:
-     Huesped *huespedes[MAX_HUESPEDES];
+        Huesped** huespedes[(int)(MAX_HUESPEDES)];
     public:
      Sistema();
      void agregarHuesped(string nombre, string email, bool esFinger);
