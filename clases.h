@@ -4,6 +4,8 @@
 using namespace std;
 
 #define MAX_HUESPEDES 256
+#define MAX_HABITACIONES 256
+#define MAX_RESERVAS 256
 
 class Habitacion{
     private:
@@ -57,6 +59,8 @@ class ReservaIndividual : public Reserva{
 class Sistema{
     private:
         Huesped** huespedes[(int)(MAX_HUESPEDES)];
+        Habitacion** habitaciones[(int)(MAX_HABITACIONES)];
+        Reserva** reservas[(int)(MAX_RESERVAS)];
     public:
      Sistema();
      void agregarHuesped(string nombre, string email, bool esFinger);
