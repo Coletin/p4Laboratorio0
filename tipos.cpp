@@ -1,5 +1,6 @@
 #include "tipos.h"
 #include <iostream>
+#include <stdexcept>
 using namespace std;
 
 DTFecha::DTFecha(){
@@ -124,6 +125,7 @@ istream& operator>>(istream& i, DTFecha& f){
     int diaN = stoi(diaS);
     int mesN = stoi(mesS);
     int anioN = stoi(anioS);
+    if(diaN > 31 || diaN < 1 || mesN > 12 || mesN < 1 || anioN < 1900) throw std::invalid_argument("Fecha fuera de rango");
     DTFecha nueva(diaN, mesN, anioN);
     f = nueva;
     return i;

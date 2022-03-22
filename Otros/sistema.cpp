@@ -8,13 +8,13 @@ using namespace std;
 Sistema::Sistema(){
 };
 
-Sistema::agregarHuesped(string nombre, string email, bool esFinger){
+void Sistema::agregarHuesped(string nombre, string email, bool esFinger){
     bool esta = false;
     bool final = false;
     int i = 0;
     while (!esta && !final && i < MAX_HUESPEDES){
-        if(this->huespedes[i] != null){            
-            esta = this->huespedes[i]->getEmail() == email;
+        if(this->huespedes[i] != nullptr){            
+            esta =(this->huespedes[i]->getEmail() == email);
             i += 1;
         }else{
             final = true;
