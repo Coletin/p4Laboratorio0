@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "tipos.h"
+//#include "tipos.h"
 using namespace std;
 
 #define MAX_HUESPEDES 256

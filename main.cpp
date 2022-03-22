@@ -1,7 +1,6 @@
 
-//#include "tipos.h"
-
-//#include "clases.h"
+#include "tipos.h"
+#include "clases.h"
 
 #include <assert.h>
 #include <float.h>
@@ -10,7 +9,7 @@
 #include <stdlib.h> 
 #include <string.h>
 #include <time.h>
-
+using namespace std;
 #define MAX_PALABRA 32
 #define MAX_LINEA 256
 

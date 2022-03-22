@@ -1,9 +1,11 @@
 #include <string>
-
+#include <iostream>
+//#include <cstring>
+using namespace std;
 //Constantes predefinidas de letra
-const int MAX_HABITACIONES = 256;
-const int MAX_HUESPEDES = 256;
-const int MAX_RESERVAS = 256;
+//const int MAX_HABITACIONES = 256;
+//const int MAX_HUESPEDES = 256;
+//const int MAX_RESERVAS = 256;
 
 class DTHuesped{
     private:
