@@ -1,7 +1,3 @@
-
-#include "tipos.h"
-#include "clases.h"
-
 #include <assert.h>
 #include <float.h>
 #include <limits.h>

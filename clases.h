@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-//#include "tipos.h"
+#include "tipos.h"
 using namespace std;
 
 #define MAX_HUESPEDES 256
@@ -30,7 +30,7 @@ class Huesped{
      bool esFinger;
     public:
      Huesped();
-     Huesped(string nombre, string email, bool esFinger);
+     Huesped(string, string, bool);
      string getEmail();
 };
 
@@ -58,13 +58,13 @@ class ReservaIndividual : public Reserva{
 
 class Sistema{
     private:
-        Huesped** huespedes[(int)(MAX_HUESPEDES)];
-        Habitacion** habitaciones[(int)(MAX_HABITACIONES)];
-        Reserva** reservas[(int)(MAX_RESERVAS)];
+        Huesped* huespedes[(int)(MAX_HUESPEDES)];
+        Habitacion* habitaciones[(int)(MAX_HABITACIONES)];
+        Reserva* reservas[(int)(MAX_RESERVAS)];
         int topeHabitaciones;
     public:
      Sistema();
      void agregarHuesped(string nombre, string email, bool esFinger);
      void agregarHabitacion(int, float, int);
-     DTHabitacion** obtenerHabitaciones(int&);
+     const DTHabitacion** obtenerHabitaciones(int&);
 };

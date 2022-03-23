@@ -1,10 +1,7 @@
 #include "../clases.h"
 #include <iostream>
 using namespace std;
-
-#include "../tipos.h"
 #include <stdexcept>
-
 Sistema::Sistema(){
 };
 
@@ -14,7 +11,7 @@ void Sistema::agregarHuesped(string nombre, string email, bool esFinger){
     int i = 0;
     while (!esta && !final && i < MAX_HUESPEDES){
         if(this->huespedes[i] != nullptr){            
-            esta =(this->huespedes[i]->getEmail() == email);
+            esta = this->huespedes[i]->getEmail() == email;
             i += 1;
         }else{
             final = true;
@@ -47,20 +44,21 @@ void Sistema::agregarHabitacion(int numero, float precio, int capacidad){
         throw std::invalid_argument( "Ya existe una habitación con el número indicado" );
 
     //llegamos hasta aca entonces podemos agregar OK
-    Habitacion habitacionAgregar = new Habitacion(numero, precio, capacidad);
+    Habitacion* habitacionAgregar = new Habitacion(numero, precio, capacidad);
     this->habitaciones[topeHabitaciones] = habitacionAgregar;
 };
 
-DTHabitacion** Sistema::obtenerHabitaciones(int& cantHabitaciones){
-    DTHabitacion** respuesta[this->topeHabitaciones] = {nullptr};
+const DTHabitacion** Sistema::obtenerHabitaciones(int& cantHabitaciones){
+    const DTHabitacion** respuesta[this->topeHabitaciones];
+    respuesta[this->topeHabitaciones] = nullptr;
     cantHabitaciones = this->topeHabitaciones;
     
     for(int i = 0; i<this->topeHabitaciones; i++){
         int numero = this->habitaciones[i]->getNumero();
         float precio = this->habitaciones[i]->getPrecio();
         int capacidad = this->habitaciones[i]->getCapacidad();
-        DTHabitacion agregar = new DTHabitacion(numero, precio, capacidad);
-        respuesta[i] = &agregar;
+        DTHabitacion* agregar = new DTHabitacion(numero, precio, capacidad);
+        *respuesta[i] = agregar;
     }
-    return respuesta;
+    return *respuesta;
 };

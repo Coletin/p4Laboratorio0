@@ -1,5 +1,4 @@
 #include "../clases.h"
-#include "../tipos.h"
 
 Habitacion::Habitacion(){
 };
