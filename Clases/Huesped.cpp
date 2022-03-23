@@ -9,3 +9,11 @@ Huesped::Huesped(string Nnombre, string Nemail, bool NesFinger){
     this->email = Nemail;
     this->esFinger = NesFinger;
 };
+
+string Huesped::getNombre(){
+    return this->nombre;
+};
+
+bool Huesped::getEsFinger(){
+    return this->esFinger;
+};

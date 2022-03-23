@@ -5,6 +5,7 @@
 #include <stdlib.h> 
 #include <string.h>
 #include <time.h>
+#include "clases.h"
 using namespace std;
 #define MAX_PALABRA 32
 #define MAX_LINEA 256
@@ -27,7 +28,7 @@ char nom_comando[MAX_PALABRA];
     system("cls");
     printf("1.Agregar Huesped.\n");
     printf("2.Agregar Habitacion.\n");
-    printf("3.Obtener Huesped.\n");
+    printf("3.Obtener Huespedes.\n");
     printf("4.Obtener Habitaciones.\n");
     printf("5.Registrar Reserva.\n");
     printf("6.Obtener Reserva.\n");
@@ -52,6 +53,7 @@ char nom_comando[MAX_PALABRA];
     } else if (!strcmp(nom_comando, "1")) {
     
       printf("1.Agregar Huesped.\n");
+
       system("pause");
 
     } else if (!strcmp(nom_comando, "2")) {
@@ -61,7 +63,7 @@ char nom_comando[MAX_PALABRA];
 
     } else if (!strcmp(nom_comando, "3")) {
       
-      printf("3.Obtener Huesped.\n");
+      printf("3.Obtener Huespedes.\n");
       system("pause");
 
     } 

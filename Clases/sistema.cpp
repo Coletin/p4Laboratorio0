@@ -20,6 +20,7 @@ void Sistema::agregarHuesped(string nombre, string email, bool esFinger){
 
     if(final && !esta){
         this->huespedes[i] = new Huesped(nombre, email, esFinger);
+        this->cantHuespedes = cantHuespedes + 1;
     }else{
         throw std::invalid_argument("Ya existe el huesped.");
     }
@@ -46,6 +47,21 @@ void Sistema::agregarHabitacion(int numero, float precio, int capacidad){
     //llegamos hasta aca entonces podemos agregar OK
     Habitacion* habitacionAgregar = new Habitacion(numero, precio, capacidad);
     this->habitaciones[topeHabitaciones] = habitacionAgregar;
+};
+
+const DTHuesped** Sistema::obtenerHuespedes(int& cantHuespedes){
+    const DTHuesped** respuesta[this->cantHuespedes];
+    respuesta[this->cantHuespedes] = nullptr;
+    cantHuespedes = this->cantHuespedes;
+    
+    for(int i = 0; i<this->cantHuespedes; i++){
+        string nombre = this->huespedes[i]->getNombre();
+        string email = this->huespedes[i]->getEmail();
+        bool esFinger = this->huespedes[i]->getEsFinger();
+        DTHuesped* agregar = new DTHuesped(nombre, email, esFinger);
+        *respuesta[i] = agregar;
+    }
+    return *respuesta;
 };
 
 const DTHabitacion** Sistema::obtenerHabitaciones(int& cantHabitaciones){

@@ -32,6 +32,8 @@ class Huesped{
      Huesped();
      Huesped(string, string, bool);
      string getEmail();
+     string getNombre();
+     bool getEsFinger();
 };
 
 class Reserva{
@@ -62,9 +64,11 @@ class Sistema{
         Habitacion* habitaciones[(int)(MAX_HABITACIONES)];
         Reserva* reservas[(int)(MAX_RESERVAS)];
         int topeHabitaciones;
+        int cantHuespedes = 0;
     public:
      Sistema();
      void agregarHuesped(string nombre, string email, bool esFinger);
      void agregarHabitacion(int, float, int);
+     const DTHuesped** obtenerHuespedes(int&);
      const DTHabitacion** obtenerHabitaciones(int&);
 };
