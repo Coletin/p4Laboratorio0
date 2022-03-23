@@ -50,6 +50,40 @@ void Sistema::agregarHabitacion(int numero, float precio, int capacidad){
     this->topeHabitaciones= this->topeHabitaciones + 1;
 };
 
+void Sistema::registrarReserva(string email,DTReserva reserva){
+    int huespedEnSistema = 0;
+    int habitacionEnSistema = 0;
+    while((huespedEnSistema <= topeHuespedes) && (email != huespedes[huespedEnSistema]->getEmail())){
+        huespedEnSistema++;
+    }
+    if(huespedEnSistema > topeHuespedes)
+        throw std::invalid_argument("No existe un huésped registrado con el email");
+    else{
+        while((habitacionEnSistema <= topeHabiataciones) && (reserva:getHabitacion() != habitaciones[habitacionEnSistema]->getNumero())){
+            habitacionEnSistema++;
+        }
+        if(habitacionEnSistema > topeHabitaciones){
+            throw std::invalid_argument("no existe una habitación registrada en el sistema con el número indicado");
+        }else{
+            int codigo= reserva:getCodigo();
+            DTFecha cIn= reserva:getCheckIn();
+            DTFecha cOut= reserva:getCkeckOut();
+            EstadoReserva estado = reserva:getEstado();
+            Habitacion* habitacion = habitaciones[habitacionEnSistema];
+            Huesped* huesped = husepedes[huespedEnSistema];
+            if(esResrvaGrupal){
+                Huesped** huespedes = reserva:getHuespedes();
+                reservas[topeReservas] = new ReservaGrupal(codigo,cIn,cOut,estado,habitacion,huesped,huespedes);
+                topeResrvas++;
+            }else{
+                bool pagado = reserva:getPagado();
+                reservas[topeReservas] = new ReservaIndividual(codigo,cIn,cOut,estado,habitacion,huesped,pagado);
+                topeReservas++;
+            }
+        }
+    }
+};
+
 const DTHuesped** Sistema::obtenerHuespedes(int& cantHuespedes){
     const DTHuesped** respuesta[this->cantHuespedes];
     respuesta[this->cantHuespedes] = nullptr;

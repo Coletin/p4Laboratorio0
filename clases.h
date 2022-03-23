@@ -42,12 +42,18 @@ class Reserva{
      DTFecha checkIn;
      DTFecha checkOut;
      EstadoReserva estado;
+     Habitacion* habitacion;
+     Huesped* huesped;
     public:
+     Reserva(int,DTFecha,DTFecha,EstadoReserva,Habitacion*,Huesped*); 
+     ~Reserva();
      virtual float calcularCosto() = 0;
      int getCodigo();
      DTFecha getCheckIn();
      DTFecha getCheckOut();
      EstadoReserva getEstado();
+     Habitacion* getHabitacion();
+     Huesped* getHuesped();
      void setCodigo(int&);
      void setCheckIn(DTFecha&);
      void setCheckOut(DTFecha&);
@@ -55,15 +61,24 @@ class Reserva{
 };
 
 class ReservaGrupal : public Reserva{
+    private:
+     Huesped** huespedes;
     public:
+     ReservaGrupal(int,DTFecha,DTFecha,EstadoReserva,Habitacion*,Huesped*,Huesped**); 
+     ~ReservaGrupal(); 
      virtual float calcularCosto();
+     Huesped** getHuespedes(); 
 };
 
 class ReservaIndividual : public Reserva{
     private:
      bool pagado;
     public:
+     ReservaIndividual(int,DTFecha,DTFecha,EstadoReserva,Habitacion*,Huesped*,bool);
+     ~ReservaIndividual();
      virtual float calcularCosto();
+     bool getPagado(); 
+     void setPagodo(bool); 
 };
 
 class Sistema{
