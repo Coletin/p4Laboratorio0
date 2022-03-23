@@ -57,13 +57,37 @@ class DTFecha{
 };
 
 class DTReserva{
-
+     private: 
+        int codigo;
+        DTFecha chekIn;
+        DTFecha checkOut;
+        EstadoReserva estado;
+        float costo;
+        int habitacion;
+    public: 
+        DTReserva(int,DTFecha,DTFecha,EstadoReserva,float,int); 
+        int getCodigo();
+        DTFecha getchekIn(); 
+        DTFecha getchekOut();
+        EstadoReserva getEstadoReserva();
+        float getCosto();
+        int getHabitacion(); 
 };
 
 class DTReservaIndividual : public DTReserva{
-
+ private: 
+    bool pagado;
+ public: 
+    //orden:codigo,checkIn,checkOut,estadoReserva,costo,habitacion,pago
+    DTReservaIndividual(int,DTFecha,DTFecha,EstadoReserva,float,int,bool);
+    bool getPagado(); 
 };
 
 class DTReservaGrupal : public DTReserva{
-
+ private: 
+    DTHuesped** huespedes;
+ public: 
+    //orden:codigo,checkIn,checkOut,estadoReserva,costo,habitacion,huespedes
+    DTReservaGrupal(int,DTFecha,DTFecha,EstadoReserva,float,int,DTHuesped*); 
+    DTHuesped** getHuespedes(); 
 };
