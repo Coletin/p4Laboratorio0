@@ -44,6 +44,14 @@ class Reserva{
      EstadoReserva estado;
     public:
      virtual float calcularCosto() = 0;
+     int getCodigo();
+     DTFecha getCheckIn();
+     DTFecha getCheckOut();
+     EstadoReserva getEstado();
+     void setCodigo(int&);
+     void setCheckIn(DTFecha&);
+     void setCheckOut(DTFecha&);
+     void setEstado(EstadoReserva&);
 };
 
 class ReservaGrupal : public Reserva{

@@ -3,6 +3,9 @@
 using namespace std;
 #include <stdexcept>
 Sistema::Sistema(){
+    this->huespedes[0]=nullptr;
+    this->habitaciones[0]=nullptr;
+    this->reservas[0]=nullptr;
 };
 
 void Sistema::agregarHuesped(string nombre, string email, bool esFinger){
@@ -17,14 +20,12 @@ void Sistema::agregarHuesped(string nombre, string email, bool esFinger){
             final = true;
         }
     }
-
     if(final && !esta){
         this->huespedes[i] = new Huesped(nombre, email, esFinger);
         this->cantHuespedes = cantHuespedes + 1;
     }else{
         throw std::invalid_argument("Ya existe el huesped.");
     }
-    
 }
 
 void Sistema::agregarHabitacion(int numero, float precio, int capacidad){

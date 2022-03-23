@@ -21,7 +21,7 @@ void leerChars(ArregloChars cs) { scanf("%s", cs); }
 
 int main() {
 char nom_comando[MAX_PALABRA];
-
+  Sistema s;
   int cont_comandos = 0;
   bool salir = false;
   while (!salir) {
@@ -53,9 +53,18 @@ char nom_comando[MAX_PALABRA];
     } else if (!strcmp(nom_comando, "1")) {
     
       printf("1.Agregar Huesped.\n");
-
+      printf("Ingrese el nombre\n");
+      leerChars(nom_comando);
+      string nombre = (string)nom_comando;
+      printf("Ingrese el email\n");
+      leerChars(nom_comando);
+      string email = (string)nom_comando;
+      printf("Es Finger? 1-Si 0-No\n");
+      leerChars(nom_comando);
+      bool esFinger = (bool)nom_comando[0];
+      s.agregarHuesped(nombre, email, esFinger);
       system("pause");
-
+      
     } else if (!strcmp(nom_comando, "2")) {
      
       printf("2.Agregar Habitacion.\n");
