@@ -53,7 +53,7 @@ char nom_comando[MAX_PALABRA];
     } else if (!strcmp(nom_comando, "1")) {
     
       printf("1.Agregar Huesped.\n");
-      printf("Ingrese el nombre\n");
+      printf("Ingrese el nombre(sin espacios)\n");
       leerChars(nom_comando);
       string nombre = (string)nom_comando;
       printf("Ingrese el email\n");
@@ -64,12 +64,24 @@ char nom_comando[MAX_PALABRA];
       bool esFinger = (bool)nom_comando[0];
       s.agregarHuesped(nombre, email, esFinger);
       system("pause");
-      
+
     } else if (!strcmp(nom_comando, "2")) {
      
       printf("2.Agregar Habitacion.\n");
+      printf("Ingrese el numero\n");
+      int numero;
+      leerChars(nom_comando);
+      sscanf(nom_comando,"%d",&numero);
+      printf("Ingrese el precio\n");
+      float precio;
+      leerChars(nom_comando);
+      sscanf(nom_comando,"%f",&precio);
+      printf("Ingrese la capacidad\n");
+      int capacidad;
+      leerChars(nom_comando);
+      sscanf(nom_comando,"%d",&capacidad);
+      s.agregarHabitacion(numero, precio, capacidad);
       system("pause");
-
     } else if (!strcmp(nom_comando, "3")) {
       
       printf("3.Obtener Huespedes.\n");

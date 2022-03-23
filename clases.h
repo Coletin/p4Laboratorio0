@@ -71,7 +71,7 @@ class Sistema{
         Huesped* huespedes[(int)(MAX_HUESPEDES)];
         Habitacion* habitaciones[(int)(MAX_HABITACIONES)];
         Reserva* reservas[(int)(MAX_RESERVAS)];
-        int topeHabitaciones;
+        int topeHabitaciones = 0;
         int cantHuespedes = 0;
     public:
      Sistema();

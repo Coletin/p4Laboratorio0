@@ -44,10 +44,10 @@ void Sistema::agregarHabitacion(int numero, float precio, int capacidad){
     }
     if(busqueda < topeHabitaciones)
         throw std::invalid_argument( "Ya existe una habitación con el número indicado" );
-
     //llegamos hasta aca entonces podemos agregar OK
     Habitacion* habitacionAgregar = new Habitacion(numero, precio, capacidad);
     this->habitaciones[topeHabitaciones] = habitacionAgregar;
+    this->topeHabitaciones= this->topeHabitaciones + 1;
 };
 
 const DTHuesped** Sistema::obtenerHuespedes(int& cantHuespedes){
@@ -69,13 +69,12 @@ const DTHabitacion** Sistema::obtenerHabitaciones(int& cantHabitaciones){
     const DTHabitacion** respuesta[this->topeHabitaciones];
     respuesta[this->topeHabitaciones] = nullptr;
     cantHabitaciones = this->topeHabitaciones;
-    
     for(int i = 0; i<this->topeHabitaciones; i++){
         int numero = this->habitaciones[i]->getNumero();
         float precio = this->habitaciones[i]->getPrecio();
         int capacidad = this->habitaciones[i]->getCapacidad();
         DTHabitacion* agregar = new DTHabitacion(numero, precio, capacidad);
         *respuesta[i] = agregar;
-    }
+    };
     return *respuesta;
 };
