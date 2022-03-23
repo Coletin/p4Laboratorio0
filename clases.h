@@ -61,8 +61,10 @@ class Sistema{
         Huesped** huespedes[(int)(MAX_HUESPEDES)];
         Habitacion** habitaciones[(int)(MAX_HABITACIONES)];
         Reserva** reservas[(int)(MAX_RESERVAS)];
+        int topeHabitaciones;
     public:
      Sistema();
      void agregarHuesped(string nombre, string email, bool esFinger);
-
+     void agregarHabitacion(int, float, int);
+     DTHabitacion** obtenerHabitaciones(int&);
 };
