@@ -94,6 +94,6 @@ class Sistema{
      void agregarHuesped(string nombre, string email, bool esFinger);
      void agregarHabitacion(int, float, int);
      const DTHuesped** obtenerHuespedes(int&);
-     const DTHabitacion** obtenerHabitaciones(int&);
+     DTHabitacion** obtenerHabitaciones(int&);
      void registrarReserva(string,DTReserva*);
 };

@@ -31,6 +31,7 @@ class DTHabitacion{
         int getNumero();
         float getPrecio();
         int getCapacidad();
+        void toString();
 };
 
 enum EstadoReserva{

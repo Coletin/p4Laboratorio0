@@ -168,6 +168,10 @@ float DTHabitacion::getPrecio(){return this->precio;};
 
 int DTHabitacion::getCapacidad(){return this->capacidad;};
 
+void DTHabitacion::toString(){
+    cout << "[numero: " << this->getNumero() << "; capacidad: " << this->getCapacidad() << "; precio: " << this->getPrecio() << "]" ;
+};
+
 DTReserva::DTReserva(int _codigo,DTFecha _checkIn,DTFecha _checkOut,EstadoReserva _estado,float _costo,int _habitacion){
     codigo = _codigo;
     chekIn = _checkIn;

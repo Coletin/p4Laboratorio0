@@ -87,7 +87,7 @@ void Sistema::registrarReserva(string email,DTReserva* reserva){
 };
 
 const DTHuesped** Sistema::obtenerHuespedes(int& cantHuespedes){
-    const DTHuesped** respuesta[this->cantHuespedes];
+    const DTHuesped** respuesta[MAX_HUESPEDES];
     respuesta[this->cantHuespedes] = nullptr;
     cantHuespedes = this->cantHuespedes;
     
@@ -101,16 +101,14 @@ const DTHuesped** Sistema::obtenerHuespedes(int& cantHuespedes){
     return *respuesta;
 };
 
-const DTHabitacion** Sistema::obtenerHabitaciones(int& cantHabitaciones){
-    const DTHabitacion** respuesta[this->topeHabitaciones];
-    respuesta[this->topeHabitaciones] = nullptr;
+DTHabitacion** Sistema::obtenerHabitaciones(int& cantHabitaciones){
+    DTHabitacion** respuesta = new DTHabitacion*[topeHabitaciones];
     cantHabitaciones = this->topeHabitaciones;
     for(int i = 0; i<this->topeHabitaciones; i++){
         int numero = this->habitaciones[i]->getNumero();
         float precio = this->habitaciones[i]->getPrecio();
         int capacidad = this->habitaciones[i]->getCapacidad();
-        DTHabitacion* agregar = new DTHabitacion(numero, precio, capacidad);
-        *respuesta[i] = agregar;
+        respuesta[i] = new DTHabitacion(numero, precio, capacidad);
     };
-    return *respuesta;
+    return respuesta;
 };

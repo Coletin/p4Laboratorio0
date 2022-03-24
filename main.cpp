@@ -25,6 +25,7 @@ char nom_comando[MAX_PALABRA];
   int cont_comandos = 0;
   bool salir = false;
   while (!salir) {
+    try{
     system("cls");
     printf("1.Agregar Huesped.\n");
     printf("2.Agregar Habitacion.\n");
@@ -89,10 +90,15 @@ char nom_comando[MAX_PALABRA];
 
     } 
     else if (!strcmp(nom_comando, "4")) {
-      
+      system("cls");
       printf("4.Obtener Habitaciones.\n");
+      int numero = 0;
+      DTHabitacion** habitaciones = s.obtenerHabitaciones(numero);
+      for(int i = 0; i<numero; i++){
+        //cout << numero;
+        habitaciones[i]->toString();
+      }
       system("pause");
-
     } 
 
     else if (!strcmp(nom_comando, "5")) {
@@ -118,5 +124,8 @@ char nom_comando[MAX_PALABRA];
       printf("Comando no reconocido.\n");
        system("pause");
     }
+    }catch(const std::invalid_argument& ex){
+      cout << ex.what();  
+    }    
   }
 }
