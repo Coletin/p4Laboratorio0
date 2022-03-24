@@ -51,7 +51,7 @@ void Sistema::agregarHabitacion(int numero, float precio, int capacidad){
     this->topeHabitaciones= this->topeHabitaciones + 1;
 };
 
-void Sistema::registrarReserva(string email,DTReserva reserva){
+void Sistema::registrarReserva(string email,DTReserva* reserva){
     int huespedEnSistema = 0;
     int habitacionEnSistema = 0;
     while((huespedEnSistema <= this->cantHuespedes) && (email != huespedes[huespedEnSistema]->getEmail())){
@@ -60,26 +60,27 @@ void Sistema::registrarReserva(string email,DTReserva reserva){
     if(huespedEnSistema > this->cantHuespedes)
         throw std::invalid_argument("No existe un huésped registrado con el email");
     else{
-        while((habitacionEnSistema <= this->topeHabitaciones) && (reserva.getHabitacion() != habitaciones[habitacionEnSistema]->getNumero())){
+        while((habitacionEnSistema <= this->topeHabitaciones) && (reserva->getHabitacion() != habitaciones[habitacionEnSistema]->getNumero())){
             habitacionEnSistema++;
         }
         if(habitacionEnSistema > topeHabitaciones){
             throw std::invalid_argument("no existe una habitación registrada en el sistema con el número indicado");
         }else{
-            int codigo= reserva.getCodigo();
-            DTFecha cIn= reserva.getchekIn();
-            DTFecha cOut= reserva.getchekOut();
-            EstadoReserva estado = reserva.getEstadoReserva();
+            int codigo= reserva->getCodigo();
+            DTFecha cIn= reserva->getchekIn();
+            DTFecha cOut= reserva->getchekOut();
+            EstadoReserva estado = reserva->getEstadoReserva();
             Habitacion* habitacion = habitaciones[habitacionEnSistema];
             Huesped* huesped = huespedes[huespedEnSistema];
             if(typeid(reserva).name()=="ReservaGrupal"){
-                Huesped** huespedes = reserva.getHuespedes();
-                reservas[topeReservas] = new ReservaGrupal(codigo,cIn,cOut,estado,habitacion,huesped,huespedes);
-                topeResrvas++;
+                //Huesped** huespedes = dynamic_cast<DTReservaGrupal*>(reserva);
+                reservas[this->topeReservas] = new ReservaGrupal(codigo,cIn,cOut,estado,habitacion,huesped,huespedes);
+                this->topeReservas++;
             }else{
-                bool pagado = reserva:getPagado();
-                reservas[topeReservas] = new ReservaIndividual(codigo,cIn,cOut,estado,habitacion,huesped,pagado);
-                topeReservas++;
+                //bool pagado = reserva->getPagado();
+                bool pagado = true;
+                reservas[this->topeReservas] = new ReservaIndividual(codigo,cIn,cOut,estado,habitacion,huesped,pagado);
+                this->topeReservas++;
             }
         }
     }

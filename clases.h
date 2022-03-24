@@ -88,11 +88,12 @@ class Sistema{
         Reserva* reservas[(int)(MAX_RESERVAS)];
         int topeHabitaciones = 0;
         int cantHuespedes = 0;
+        int topeReservas = 0;
     public:
      Sistema();
      void agregarHuesped(string nombre, string email, bool esFinger);
      void agregarHabitacion(int, float, int);
      const DTHuesped** obtenerHuespedes(int&);
      const DTHabitacion** obtenerHabitaciones(int&);
-     void registrarReserva(string,DTReserva);
+     void registrarReserva(string,DTReserva*);
 };
