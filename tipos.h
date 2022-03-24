@@ -88,6 +88,6 @@ class DTReservaGrupal : public DTReserva{
     DTHuesped** huespedes;
  public: 
     //orden:codigo,checkIn,checkOut,estadoReserva,costo,habitacion,huespedes
-    DTReservaGrupal(int,DTFecha,DTFecha,EstadoReserva,float,int,DTHuesped*); 
+    DTReservaGrupal(int,DTFecha,DTFecha,EstadoReserva,float,int,DTHuesped**); 
     DTHuesped** getHuespedes(); 
 };

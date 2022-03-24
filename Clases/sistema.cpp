@@ -1,5 +1,6 @@
 #include "../clases.h"
 #include <iostream>
+#include <typeinfo>
 using namespace std;
 #include <stdexcept>
 Sistema::Sistema(){
@@ -10,17 +11,17 @@ Sistema::Sistema(){
 
 void Sistema::agregarHuesped(string nombre, string email, bool esFinger){
     bool esta = false;
-    bool final = false;
+    bool finals = false;
     int i = 0;
-    while (!esta && !final && i < MAX_HUESPEDES){
+    while (!esta && !finals && i < MAX_HUESPEDES){
         if(this->huespedes[i] != nullptr){            
             esta = this->huespedes[i]->getEmail() == email;
             i += 1;
         }else{
-            final = true;
+            finals = true;
         }
     }
-    if(final && !esta){
+    if(finals && !esta){
         this->huespedes[i] = new Huesped(nombre, email, esFinger);
         this->cantHuespedes = cantHuespedes + 1;
     }else{
@@ -53,26 +54,26 @@ void Sistema::agregarHabitacion(int numero, float precio, int capacidad){
 void Sistema::registrarReserva(string email,DTReserva reserva){
     int huespedEnSistema = 0;
     int habitacionEnSistema = 0;
-    while((huespedEnSistema <= topeHuespedes) && (email != huespedes[huespedEnSistema]->getEmail())){
+    while((huespedEnSistema <= this->cantHuespedes) && (email != huespedes[huespedEnSistema]->getEmail())){
         huespedEnSistema++;
     }
-    if(huespedEnSistema > topeHuespedes)
+    if(huespedEnSistema > this->cantHuespedes)
         throw std::invalid_argument("No existe un huésped registrado con el email");
     else{
-        while((habitacionEnSistema <= topeHabiataciones) && (reserva:getHabitacion() != habitaciones[habitacionEnSistema]->getNumero())){
+        while((habitacionEnSistema <= this->topeHabitaciones) && (reserva.getHabitacion() != habitaciones[habitacionEnSistema]->getNumero())){
             habitacionEnSistema++;
         }
         if(habitacionEnSistema > topeHabitaciones){
             throw std::invalid_argument("no existe una habitación registrada en el sistema con el número indicado");
         }else{
-            int codigo= reserva:getCodigo();
-            DTFecha cIn= reserva:getCheckIn();
-            DTFecha cOut= reserva:getCkeckOut();
-            EstadoReserva estado = reserva:getEstado();
+            int codigo= reserva.getCodigo();
+            DTFecha cIn= reserva.getchekIn();
+            DTFecha cOut= reserva.getchekOut();
+            EstadoReserva estado = reserva.getEstadoReserva();
             Habitacion* habitacion = habitaciones[habitacionEnSistema];
-            Huesped* huesped = husepedes[huespedEnSistema];
-            if(esResrvaGrupal){
-                Huesped** huespedes = reserva:getHuespedes();
+            Huesped* huesped = huespedes[huespedEnSistema];
+            if(typeid(reserva).name()=="ReservaGrupal"){
+                Huesped** huespedes = reserva.getHuespedes();
                 reservas[topeReservas] = new ReservaGrupal(codigo,cIn,cOut,estado,habitacion,huesped,huespedes);
                 topeResrvas++;
             }else{

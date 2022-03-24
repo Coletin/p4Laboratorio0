@@ -94,4 +94,5 @@ class Sistema{
      void agregarHabitacion(int, float, int);
      const DTHuesped** obtenerHuespedes(int&);
      const DTHabitacion** obtenerHabitaciones(int&);
+     void registrarReserva(string,DTReserva);
 };

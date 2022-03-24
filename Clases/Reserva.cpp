@@ -27,7 +27,7 @@ DTFecha Reserva::getCheckOut(){
     return this->checkOut;
 };
 
-EstadoReserva Reserva::getEstadoReserva(){
+EstadoReserva Reserva::getEstado(){
     return this->estado;
 };
 
@@ -52,8 +52,8 @@ void Reserva::setEstado(EstadoReserva& Nestado){
 };
 
 int diasDeReserva(DTFecha cIn,DTFecha cOut){ //mal
-    int diascIn = cIn:getDia + ((cIn:getMes - 1) * 31) + (cIn:getAnio * 364);
-    int diascOut = cOut:getDia + ((cOut:getMes - 1) * 31) + (cOut:getAnio * 364);
+    int diascIn = cIn.getDia() + ((cIn.getMes() - 1) * 31) + (cIn.getAnio() * 364);
+    int diascOut = cOut.getDia() + ((cOut.getMes() - 1) * 31) + (cOut.getAnio() * 364);
     return diascOut - diascIn;
 }
 
@@ -61,14 +61,14 @@ ReservaGrupal::ReservaGrupal(int _codigo,DTFecha _checkIn,DTFecha _checkOut,Esta
     this->huespedes = _huespedes;
 };
 
-float ReservaGrupal::CalcularCosto(){
+float ReservaGrupal::calcularCosto(){
     int i = 0;
     int fing = 0;
     while(this->huespedes[i] != NULL){
-        if(this->huespedes[i]->Huesped:getEsFinger())
+        if(this->huespedes[i]->getEsFinger())
             fing++;
     }
-    float costo = (this->habitacion->Habitacion::getCosto() * diasDeReserva(this->checkIn,this->checkOut)) * (i-1);
+    float costo = (this->getHabitacion()->getPrecio() * diasDeReserva(this->getCheckIn(),this->getCheckOut())) * (i-1);
     if(fing > 1)
         costo = costo - costo*0.3;
     return costo;
@@ -91,5 +91,5 @@ bool ReservaIndividual::getPagado(){
 };
 
 float ReservaIndividual::calcularCosto(){
-    return habitacion->Habitacion::getCosto * diasDeReserva(checkIn,checkOut);
+    return this->getHabitacion()->getPrecio() * diasDeReserva(getCheckIn(),getCheckOut());
 };
