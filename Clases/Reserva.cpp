@@ -64,7 +64,7 @@ ReservaGrupal::ReservaGrupal(int _codigo,DTFecha _checkIn,DTFecha _checkOut,Esta
 float ReservaGrupal::calcularCosto(){
     int i = 0;
     int fing = 0;
-    while(this->huespedes[i] != NULL){
+    while(this->huespedes[i] != nullptr){
         if(this->huespedes[i]->getEsFinger())
             fing++;
     }

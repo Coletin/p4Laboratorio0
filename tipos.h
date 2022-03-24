@@ -91,3 +91,7 @@ class DTReservaGrupal : public DTReserva{
     DTReservaGrupal(int,DTFecha,DTFecha,EstadoReserva,float,int,DTHuesped**); 
     DTHuesped** getHuespedes(); 
 };
+
+ostream& operator<<(ostream&, DTReservaGrupal&);
+ostream& operator<<(ostream&, DTReservaIndividual&);
+ostream& operator<<(ostream&, DTFecha&);

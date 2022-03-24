@@ -90,7 +90,7 @@ bool DTFecha::operator>=(const DTFecha& meIgual){
     return menor||igual;
 };
 
-ostream& operator<<(ostream& o, DTFecha f){
+ostream& operator<<(ostream& o, DTFecha& f){
     if((f.getDia()-10) < 0) o << '0';
     o << f.getDia();
     o << '/';
@@ -219,33 +219,40 @@ DTHuesped** DTReservaGrupal::getHuespedes(){
 ostream& operator<<(ostream& o, DTReservaIndividual& ri){
     o << "TipoReserva: Individual" << endl;
     o << "FechaCheckIn: ";
-    o << ri.getchekIn();
+    DTFecha f = ri.getchekIn();
+    o << f;
     o << endl;
     o << "FechaCheckOut: ";
-    o << ri.getchekOut();
+    f = ri.getchekOut();
+    o << f;
     o << endl;
     o << "Habitación: " << ri.getHabitacion() << endl;
     o << "Costo: " << ri.getCosto() << endl;
-    o << "Pagado: " << ri.getPagado() << endl;
+    o << "Pagado: ";
+    if(ri.getPagado()) o << "Si";
+    else o << "No";
+    o << endl;
     return o;
 };
 
 ostream& operator<<(ostream& o, DTReservaGrupal& rg){
-    o << "TipoReserva: Individual" << endl;
+    o << "TipoReserva: Grupal" << endl;
     o << "FechaCheckIn: ";
-    o << rg.getchekIn();
+    DTFecha f = rg.getchekIn();
+    o << f;
     o << endl;
     o << "FechaCheckOut: ";
-    o << rg.getchekOut();
+    f = rg.getchekOut();
+    o << f;
     o << endl;
     o << "Habitación: " << rg.getHabitacion() << endl;
-    o << "Costo: " << rg.getCosto() << endl;
+    o << "Costo: $" << rg.getCosto() << endl;
     o << "Huespedes: ";
     int i = 0;
     while(rg.getHuespedes()[i]!=nullptr){
         o << rg.getHuespedes()[i]->getNombre() << " - " << rg.getHuespedes()[i]->getEmail();
-        if(rg.getHuespedes()[i]->getEsFinger() && i == 0) o << "es Finger";
-        else if(i == 0) o << "no es Finger";
+        if(rg.getHuespedes()[i]->getEsFinger() && i == 0) o << " - es Finger";
+        else if(i == 0) o << " - no es Finger";
         o << "," << endl << "           ";
         i++;
     }
