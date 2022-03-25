@@ -152,6 +152,10 @@ bool DTHuesped::getEsFinger(){
     return this->esFinger;
 };
 
+void DTHuesped::toString(){
+    cout << "[nombre: " << this->getNombre() << "; email: " << this->getEmail() << "; Es Finger?: " << this->getEsFinger() << "]" ;
+};
+
 DTHabitacion::DTHabitacion(){
 
 };

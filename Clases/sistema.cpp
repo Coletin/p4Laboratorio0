@@ -23,7 +23,8 @@ void Sistema::agregarHuesped(string nombre, string email, bool esFinger){
     }
     if(finals && !esta){
         this->huespedes[i] = new Huesped(nombre, email, esFinger);
-        this->cantHuespedes = cantHuespedes + 1;
+        this->cantHuespedes = this->cantHuespedes + 1;
+        this->huespedes[this->cantHuespedes] = nullptr;
     }else{
         throw std::invalid_argument("Ya existe el huesped.");
     }
@@ -47,8 +48,9 @@ void Sistema::agregarHabitacion(int numero, float precio, int capacidad){
         throw std::invalid_argument( "Ya existe una habitación con el número indicado" );
     //llegamos hasta aca entonces podemos agregar OK
     Habitacion* habitacionAgregar = new Habitacion(numero, precio, capacidad);
-    this->habitaciones[topeHabitaciones] = habitacionAgregar;
+    this->habitaciones[this->topeHabitaciones] = habitacionAgregar;
     this->topeHabitaciones= this->topeHabitaciones + 1;
+    this->habitaciones[this->topeHabitaciones] = nullptr;
 };
 
 void Sistema::registrarReserva(string email,DTReserva* reserva){
@@ -86,23 +88,24 @@ void Sistema::registrarReserva(string email,DTReserva* reserva){
     }
 };
 
-const DTHuesped** Sistema::obtenerHuespedes(int& cantHuespedes){
-    const DTHuesped** respuesta[MAX_HUESPEDES];
+DTHuesped** Sistema::obtenerHuespedes(int& cantHuespedes){
+    DTHuesped* respuesta[(int)MAX_HUESPEDES];
+    DTHuesped** respuestaN = respuesta;
     respuesta[this->cantHuespedes] = nullptr;
     cantHuespedes = this->cantHuespedes;
-    
-    for(int i = 0; i<this->cantHuespedes; i++){
+    for(int i = 0; i<cantHuespedes; i++){
         string nombre = this->huespedes[i]->getNombre();
         string email = this->huespedes[i]->getEmail();
         bool esFinger = this->huespedes[i]->getEsFinger();
-        DTHuesped* agregar = new DTHuesped(nombre, email, esFinger);
-        *respuesta[i] = agregar;
+        respuesta[i] = new DTHuesped(nombre, email, esFinger);
     }
-    return *respuesta;
+    return respuestaN;
 };
 
 DTHabitacion** Sistema::obtenerHabitaciones(int& cantHabitaciones){
-    DTHabitacion** respuesta = new DTHabitacion*[topeHabitaciones];
+    DTHabitacion* respuesta[(int)MAX_HABITACIONES];
+    DTHabitacion** respuestaN = respuesta;
+    respuesta[this->topeHabitaciones] = nullptr;
     cantHabitaciones = this->topeHabitaciones;
     for(int i = 0; i<this->topeHabitaciones; i++){
         int numero = this->habitaciones[i]->getNumero();
@@ -110,5 +113,5 @@ DTHabitacion** Sistema::obtenerHabitaciones(int& cantHabitaciones){
         int capacidad = this->habitaciones[i]->getCapacidad();
         respuesta[i] = new DTHabitacion(numero, precio, capacidad);
     };
-    return respuesta;
+    return respuestaN;
 };

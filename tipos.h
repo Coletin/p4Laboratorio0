@@ -17,7 +17,8 @@ class DTHuesped{
      DTHuesped(string, string, bool);
      string getNombre();
      string getEmail();
-     bool getEsFinger();     
+     bool getEsFinger(); 
+     void toString();    
 };
 
 class DTHabitacion{
