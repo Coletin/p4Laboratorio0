@@ -134,7 +134,7 @@ istream& operator>>(istream& i, DTFecha& f){
 DTHuesped::DTHuesped(){
 };
 
-DTHuesped::DTHuesped(string nombree, string emaile, bool esFingere){
+DTHuesped::DTHuesped(string& nombree, string& emaile, bool& esFingere){
     this->nombre = nombree;
     this->email = emaile;
     this->esFinger = esFingere;
@@ -160,7 +160,7 @@ DTHabitacion::DTHabitacion(){
 
 };
 
-DTHabitacion::DTHabitacion(int _numero, float _precio, int _capacidad){
+DTHabitacion::DTHabitacion(int& _numero, float& _precio, int& _capacidad){
     this->numero = _numero;
     this->precio = _precio;
     this->capacidad = _capacidad;
