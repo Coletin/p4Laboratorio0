@@ -14,10 +14,11 @@ class DTHuesped{
      bool esFinger;
     public:
      DTHuesped();
-     DTHuesped(string, string, bool);
+     DTHuesped(string&, string&, bool&);
      string getNombre();
      string getEmail();
-     bool getEsFinger();     
+     bool getEsFinger(); 
+     void toString();    
 };
 
 class DTHabitacion{
@@ -27,7 +28,7 @@ class DTHabitacion{
         int capacidad;
     public:
         DTHabitacion(); //PREGUNTA debemos tener constructor por defecto para los datatypes?
-        DTHabitacion(int, float, int);
+        DTHabitacion(int&, float&, int&);
         int getNumero();
         float getPrecio();
         int getCapacidad();

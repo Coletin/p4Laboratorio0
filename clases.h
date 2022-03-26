@@ -93,7 +93,7 @@ class Sistema{
      Sistema();
      void agregarHuesped(string nombre, string email, bool esFinger);
      void agregarHabitacion(int, float, int);
-     const DTHuesped** obtenerHuespedes(int&);
+     DTHuesped** obtenerHuespedes(int&);
      DTHabitacion** obtenerHabitaciones(int&);
      void registrarReserva(string,DTReserva*);
      DTReserva** obtenerReservas(DTFecha fecha,int& cantReservas);

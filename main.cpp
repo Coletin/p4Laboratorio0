@@ -62,7 +62,7 @@ char nom_comando[MAX_PALABRA];
       string email = (string)nom_comando;
       printf("Es Finger? 1-Si 0-No\n");
       leerChars(nom_comando);
-      bool esFinger = (bool)nom_comando[0];
+      bool esFinger = nom_comando[0] == '1';
       s.agregarHuesped(nombre, email, esFinger);
       system("pause");
 
@@ -86,6 +86,12 @@ char nom_comando[MAX_PALABRA];
     } else if (!strcmp(nom_comando, "3")) {
       
       printf("3.Obtener Huespedes.\n");
+      int numero = 0;
+      DTHuesped** huespedes = s.obtenerHuespedes(numero);
+      for(int i = 0; i<numero; i++){
+        //cout << numero;
+        huespedes[i]->toString();
+      }
       system("pause");
 
     } 
