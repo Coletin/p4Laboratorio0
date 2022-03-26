@@ -185,6 +185,18 @@ DTReserva::DTReserva(int _codigo,DTFecha _checkIn,DTFecha _checkOut,EstadoReserv
     habitacion = _habitacion;
 };
 
+DTReserva::DTReserva(int _codigo,DTFecha  _checkIn,DTFecha _checkOut,EstadoReserva _estado,int _habitacion){
+    codigo = _codigo;
+    chekIn = _checkIn;
+    checkOut = _checkOut;
+    estado = _estado;
+    habitacion = _habitacion;
+};
+
+void DTReservaIndividual::operacion(){};
+
+void DTReservaGrupal::operacion(){};
+
 DTFecha DTReserva::getchekIn(){
     return chekIn;
 };
@@ -209,6 +221,10 @@ int DTReserva::getHabitacion(){
 };
 
 DTReservaIndividual::DTReservaIndividual(int _codigo,DTFecha _chekIn,DTFecha _chekOut,EstadoReserva _estado,float _costo,int _habitacion,bool _pagado):DTReserva(_codigo,_chekIn,_chekOut,_estado,_costo,_habitacion){
+    this->pagado= _pagado;
+};
+
+DTReservaIndividual::DTReservaIndividual(int _codigo,DTFecha _chekIn,DTFecha _chekOut,EstadoReserva _estado,int _habitacion,bool _pagado):DTReserva(_codigo,_chekIn,_chekOut,_estado,_habitacion){
     this->pagado= _pagado;
 };
 

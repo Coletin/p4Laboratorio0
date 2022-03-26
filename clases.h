@@ -97,4 +97,8 @@ class Sistema{
      DTHabitacion** obtenerHabitaciones(int&);
      void registrarReserva(string,DTReserva*);
      DTReserva** obtenerReservas(DTFecha fecha,int& cantReservas);
+
+     //funciones auxiliares
+     bool existeHuesped(string _email);
+     bool existeHabitacion(int _numeroHab);
 };
