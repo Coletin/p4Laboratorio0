@@ -96,4 +96,5 @@ class Sistema{
      const DTHuesped** obtenerHuespedes(int&);
      DTHabitacion** obtenerHabitaciones(int&);
      void registrarReserva(string,DTReserva*);
+     DTReserva** obtenerReservas(DTFecha fecha,int& cantReservas);
 };
