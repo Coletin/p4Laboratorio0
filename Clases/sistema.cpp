@@ -76,7 +76,7 @@ void Sistema::registrarReserva(string email,DTReserva* reserva){
             Huesped* huesped = huespedes[huespedEnSistema];
             if(typeid(reserva).name()=="DTReservaGrupal"){              
                 DTReservaGrupal* dtReservagrupal = (DTReservaGrupal*)reserva; //no estoy seguro si funciona
-                Huesped** huespedes[MAX_HUESPEDES];
+                Huesped* huespedes[MAX_HUESPEDES];
                 DTHuesped** dtHuespedes = dtReservagrupal->getHuespedes();
                 int i = 0;
                 while (dtHuespedes[i] != nullptr){
@@ -102,7 +102,7 @@ void Sistema::registrarReserva(string email,DTReserva* reserva){
 
 DTReserva** Sistema::obtenerReservas(DTFecha fecha,int& cantReservas){
     cantReservas=0;
-    DTReserva** resu[MAX_RESERVAS];
+    DTReserva* resu[MAX_RESERVAS];
     int i = 0;
     while (i <= topeReservas){
         if(this->reservas[i] == nullptr){
@@ -116,7 +116,7 @@ DTReserva** Sistema::obtenerReservas(DTFecha fecha,int& cantReservas){
                 EstadoReserva _estado = _ReservaGrupal->getEstado();
                 float _costo = _ReservaGrupal->calcularCosto();
                 int _habitacion = _ReservaGrupal->getHabitacion()->getNumero();
-                DTHuesped** _huspedes[MAX_HUESPEDES];
+                DTHuesped* _huspedes[MAX_HUESPEDES];
                 Huesped** auxhuespedes = _ReservaGrupal->getHuespedes();
                 int j = 0;
                 while (auxhuespedes[j] != nullptr){
@@ -127,7 +127,7 @@ DTReserva** Sistema::obtenerReservas(DTFecha fecha,int& cantReservas){
                     j++;
                 }
                 _huspedes[j]= nullptr;
-                resu[i] = new ReservaGrupal(_codigo,_chekIn,_chekOut,_estado,_costo,_habitacion,_huspedes);
+                resu[i] = new DTReservaGrupal(_codigo,_chekIn,_chekOut,_estado,_costo,_habitacion,_huspedes);
             }else{
                 ReservaIndividual* _ReservaIndividual = (ReservaIndividual*)this->reservas[i];
                 int _codigo = _ReservaIndividual->getCodigo();
@@ -137,7 +137,7 @@ DTReserva** Sistema::obtenerReservas(DTFecha fecha,int& cantReservas){
                 float _costo = _ReservaIndividual->calcularCosto();
                 int _habitacion = _ReservaIndividual->getHabitacion()->getNumero();
                 bool _pagado = _ReservaIndividual->getPagado();
-                resu[i]= new ReservaIndividual(_codigo,_chekIn,_chekOut,_estado,_costo,_habitacion,_pagado);
+                resu[i]= new DTReservaIndividual(_codigo,_chekIn,_chekOut,_estado,_costo,_habitacion,_pagado);
             }
         }
     }
