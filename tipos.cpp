@@ -282,3 +282,17 @@ ostream& operator<<(ostream& o, DTReservaGrupal& rg){
     }
     return o;
 };
+
+ostream& operator<<(ostream& o, DTReserva &reserva){
+    try{
+        DTReservaIndividual &individual = dynamic_cast<DTReservaIndividual&>(reserva);
+        o << individual;
+    }catch(...)
+    {}
+    try{
+        DTReservaGrupal &grupal = dynamic_cast<DTReservaGrupal&>(reserva);
+        o << grupal;
+    }catch(...)
+    {}
+    return o;
+};

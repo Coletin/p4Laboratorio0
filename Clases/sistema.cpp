@@ -126,7 +126,7 @@ DTReserva** Sistema::obtenerReservas(DTFecha fecha,int& cantReservas){
     int i = 0;
     while (i < topeReservas && this->reservas[i] != nullptr){
         if(this->reservas[i]->getCheckIn() == fecha){
-            if(dynamic_cast<ReservaGrupal*>(reservas[i]) != 0){//duda
+            if(dynamic_cast<ReservaGrupal*>(reservas[i]) != 0){
             // ReservaGrupal* _ReservaGrupal = (ReservaGrupal*)this->reservas[i];
             // int _codigo = _ReservaGrupal->getCodigo();
             // DTFecha _chekIn = _ReservaGrupal->getCheckIn();

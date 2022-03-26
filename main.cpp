@@ -158,7 +158,19 @@ char nom_comando[MAX_PALABRA];
       DTFecha *fecha = new DTFecha(1,1,1);
       DTReserva **listareservas = s.obtenerReservas(*fecha,tope);
       for(int i = 0; i<tope; i++){
-        cout << (*listareservas[i]).getCosto();
+        //cout << (*listareservas[i]);
+
+        // try{
+        //   DTReservaIndividual *individual = dynamic_cast<DTReservaIndividual*>(listareservas[i]);
+        //   cout << individual;
+        // }catch(...)
+        // {}
+        // try{
+        //     DTReservaGrupal *grupal = dynamic_cast<DTReservaGrupal*>(listareservas[i]);
+        //     cout << grupal;
+        // }catch(...)
+        // {}
+        
       }
       system("pause");
 

@@ -79,6 +79,7 @@ class DTReserva{
         int getHabitacion(); 
         //~DTReserva();
         virtual void operacion() = 0;
+        friend ostream& operator << (ostream& o,DTReservaIndividual& ri);
 };
 
 class DTReservaIndividual : public DTReserva{
