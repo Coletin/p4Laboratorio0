@@ -103,7 +103,7 @@ ostream& operator<<(ostream& o, DTFecha& f){
 
 istream& operator>>(istream& i, DTFecha& f){
     char fLeer[12];
-    i.getline(fLeer, 12);
+    scanf("%s", fLeer);
     string diaS;
     string mesS;
     string anioS;
@@ -185,7 +185,7 @@ DTReserva::DTReserva(int _codigo,DTFecha _checkIn,DTFecha _checkOut,EstadoReserv
     habitacion = _habitacion;
 };
 
-DTReserva::DTReserva(int _codigo,DTFecha  _checkIn,DTFecha _checkOut,EstadoReserva _estado,int _habitacion){
+DTReserva::DTReserva(int _codigo,DTFecha _checkIn,DTFecha _checkOut,EstadoReserva _estado,int _habitacion){
     codigo = _codigo;
     chekIn = _checkIn;
     checkOut = _checkOut;
@@ -233,7 +233,11 @@ bool DTReservaIndividual::getPagado(){
 };
 
 DTReservaGrupal::DTReservaGrupal(int _codigo,DTFecha _chekIn,DTFecha _chekOut,EstadoReserva _estado,float _costo,int _habitacion,DTHuesped** _huespedes):DTReserva(_codigo, _chekIn, _chekOut, _estado, _costo, _habitacion){
-    this->huespedes= _huespedes;   
+    this->huespedes= _huespedes;
+};
+
+DTReservaGrupal::DTReservaGrupal(int _codigo,DTFecha _chekIn,DTFecha _chekOut,EstadoReserva _estado,int _habitacion,DTHuesped** _huespedes):DTReserva(_codigo, _chekIn, _chekOut, _estado, _habitacion){
+    this->huespedes= _huespedes;
 };
 
 DTHuesped** DTReservaGrupal::getHuespedes(){
@@ -250,8 +254,8 @@ ostream& operator<<(ostream& o, DTReservaIndividual& ri){
     f = ri.getchekOut();
     o << f;
     o << endl;
-    o << "Habitación: " << ri.getHabitacion() << endl;
-    o << "Costo: " << ri.getCosto() << endl;
+    o << "Habitacion: " << ri.getHabitacion() << endl;
+    o << "Costo: $" << ri.getCosto() << endl;
     o << "Pagado: ";
     if(ri.getPagado()) o << "Si";
     else o << "No";
@@ -269,7 +273,7 @@ ostream& operator<<(ostream& o, DTReservaGrupal& rg){
     f = rg.getchekOut();
     o << f;
     o << endl;
-    o << "Habitación: " << rg.getHabitacion() << endl;
+    o << "Habitacion: " << rg.getHabitacion() << endl;
     o << "Costo: $" << rg.getCosto() << endl;
     o << "Huespedes: ";
     int i = 0;
@@ -280,19 +284,20 @@ ostream& operator<<(ostream& o, DTReservaGrupal& rg){
         o << "," << endl << "           ";
         i++;
     }
+    o << endl;
     return o;
 };
 
 ostream& operator<<(ostream& o, DTReserva &reserva){
-    try{
+    if(dynamic_cast<DTReservaIndividual*>(&reserva) != 0){
         DTReservaIndividual &individual = dynamic_cast<DTReservaIndividual&>(reserva);
         o << individual;
-    }catch(...)
-    {}
-    try{
+        o << "***********************************" << endl;
+    }
+    else if(dynamic_cast<DTReservaGrupal*>(&reserva) != 0){
         DTReservaGrupal &grupal = dynamic_cast<DTReservaGrupal&>(reserva);
         o << grupal;
-    }catch(...)
-    {}
+        o << "***********************************" << endl;
+    };
     return o;
 };

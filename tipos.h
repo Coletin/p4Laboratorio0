@@ -69,8 +69,8 @@ class DTReserva{
         float costo;
         int habitacion;
     public: 
-        DTReserva(int,DTFecha,DTFecha,enum EstadoReserva,float,int); 
-        DTReserva(int,DTFecha,DTFecha,enum EstadoReserva,int); 
+        DTReserva(int,DTFecha,DTFecha,enum EstadoReserva,float,int);
+        DTReserva(int,DTFecha,DTFecha,enum EstadoReserva,int);
         int getCodigo();
         DTFecha getchekIn(); 
         DTFecha getchekOut();
@@ -79,7 +79,6 @@ class DTReserva{
         int getHabitacion(); 
         //~DTReserva();
         virtual void operacion() = 0;
-        friend ostream& operator << (ostream& o,DTReservaIndividual& ri);
 };
 
 class DTReservaIndividual : public DTReserva{
@@ -88,7 +87,7 @@ class DTReservaIndividual : public DTReserva{
  public: 
     //orden:codigo,checkIn,checkOut,estadoReserva,costo,habitacion,pago
     DTReservaIndividual(int,DTFecha,DTFecha,enum EstadoReserva,float,int,bool);
-    DTReservaIndividual(int,DTFecha,DTFecha,enum EstadoReserva,int,bool); //constructor sin costo, lo calculamos desde los dias
+    DTReservaIndividual(int,DTFecha,DTFecha,enum EstadoReserva,int,bool);
     bool getPagado(); 
     virtual void operacion();
 };
@@ -98,7 +97,8 @@ class DTReservaGrupal : public DTReserva{
     DTHuesped** huespedes;
  public: 
     //orden:codigo,checkIn,checkOut,estadoReserva,costo,habitacion,huespedes
-    DTReservaGrupal(int,DTFecha ,DTFecha ,EstadoReserva,float,int,DTHuesped**); 
+    DTReservaGrupal(int,DTFecha ,DTFecha ,EstadoReserva,float,int,DTHuesped**);
+    DTReservaGrupal(int,DTFecha ,DTFecha ,EstadoReserva,int,DTHuesped**);
     DTHuesped** getHuespedes(); 
     virtual void operacion();
 };
@@ -106,3 +106,5 @@ class DTReservaGrupal : public DTReserva{
 ostream& operator<<(ostream&, DTReservaGrupal&);
 ostream& operator<<(ostream&, DTReservaIndividual&);
 ostream& operator<<(ostream&, DTFecha&);
+istream& operator>>(istream&, DTFecha&);
+ostream& operator<<(ostream&, DTReserva&);

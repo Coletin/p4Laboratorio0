@@ -100,5 +100,6 @@ class Sistema{
 
      //funciones auxiliares
      bool existeHuesped(string _email);
+     Huesped* buscarHuesped(string _email);
      bool existeHabitacion(int _numeroHab);
 };

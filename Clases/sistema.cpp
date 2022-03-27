@@ -74,33 +74,32 @@ void Sistema::registrarReserva(string email,DTReserva* reserva){
             EstadoReserva estado = reserva->getEstadoReserva();
             Habitacion* habitacion = habitaciones[habitacionEnSistema];
             Huesped* huesped = huespedes[huespedEnSistema];
-            if( dynamic_cast<DTReservaGrupal*>(reserva) != 0 ){              
-                // DTReservaGrupal* dtReservagrupal = (DTReservaGrupal*)reserva; //no estoy seguro si funciona
-                // Huesped* huespedes[MAX_HUESPEDES];
-                // DTHuesped** dtHuespedes = dtReservagrupal->getHuespedes();
-                // int i = 0;
-                // while (dtHuespedes[i] != nullptr){
-                //     string nombre = dtHuespedes[i]->getNombre();
-                //     string email = dtHuespedes[i]->getEmail();
-                //     bool esFinger = dtHuespedes[i]->getEsFinger();
-                //     huespedes[i] = new Huesped(nombre,email,esFinger); //no se si falta *
-                //     i++;
-                // }
-                // huespedes[i] = nullptr;
-                // reservas[this->topeReservas] = new ReservaGrupal(codigo,cIn,cOut,estado,habitacion,huesped,huespedes);
-                // this->topeReservas++;
+            if( dynamic_cast<DTReservaGrupal*>(reserva) != 0 ){
+                DTReservaGrupal *reservaGrupal = dynamic_cast<DTReservaGrupal*>(reserva);
+                Huesped* huespedes[MAX_HUESPEDES];
+                DTHuesped** dtHuespedes = reservaGrupal->getHuespedes();
+                int i = 0;
+                while (dtHuespedes[i] != nullptr){
+                     string nombre = dtHuespedes[i]->getNombre();
+                     string email = dtHuespedes[i]->getEmail();
+                     bool esFinger = dtHuespedes[i]->getEsFinger();
+                     huespedes[i] = new Huesped(nombre, email, esFinger);
+                     i++;
+                }
+                huespedes[i] = nullptr;
+                reservas[this->topeReservas] = new ReservaGrupal(codigo,cIn,cOut,estado,habitacion,huesped,huespedes);
+                this->topeReservas++;
+                reservas[this->topeReservas] = nullptr;
                 cout << "reserva grupal";
             }else if( dynamic_cast<DTReservaIndividual*>(reserva) != 0 ){
                 DTReservaIndividual *reservaIndividual = dynamic_cast<DTReservaIndividual*>(reserva);
                 bool pagado = reservaIndividual->getPagado();
                 reservas[this->topeReservas] = new ReservaIndividual(codigo,cIn,cOut,estado,habitacion,huesped,pagado);
                 this->topeReservas++;
-                cout << "agrega2";
-            }else{
-                cout << "reserva else";
-            }
-        }
-    }
+                reservas[this->topeReservas] = nullptr;
+            };
+        };
+    };
 };
 
 bool Sistema::existeHuesped(string _email){
@@ -109,6 +108,14 @@ bool Sistema::existeHuesped(string _email){
         contador ++;
     }
     return contador < this->cantHuespedes;
+}
+
+Huesped* Sistema::buscarHuesped(string _email){
+    int contador = 0;
+    while(contador < this->cantHuespedes && _email.compare(this->huespedes[contador]->getEmail()) != 0){
+        contador ++;
+    }
+    return huespedes[contador];
 }
 
 bool Sistema::existeHabitacion(int _numero){
@@ -124,35 +131,34 @@ DTReserva** Sistema::obtenerReservas(DTFecha fecha,int& cantReservas){
     DTReserva* resu[MAX_RESERVAS];
     DTReserva** resuN = resu;
     int i = 0;
+    cout << this->reservas[0]->calcularCosto();
     while (i < topeReservas && this->reservas[i] != nullptr){
         if(this->reservas[i]->getCheckIn() == fecha){
             if(dynamic_cast<ReservaGrupal*>(reservas[i]) != 0){
-            // ReservaGrupal* _ReservaGrupal = (ReservaGrupal*)this->reservas[i];
-            // int _codigo = _ReservaGrupal->getCodigo();
-            // DTFecha _chekIn = _ReservaGrupal->getCheckIn();
-            // DTFecha _chekOut = _ReservaGrupal->getCheckOut();
-            // EstadoReserva _estado = _ReservaGrupal->getEstado();
-            // float _costo = _ReservaGrupal->calcularCosto();
-            // int _habitacion = _ReservaGrupal->getHabitacion()->getNumero();
-            // DTHuesped* _huspedes[MAX_HUESPEDES];
-            // Huesped** auxhuespedes = _ReservaGrupal->getHuespedes();
-            // int j = 0;
-            // while (auxhuespedes[j] != nullptr){
-            //     string nombre = auxhuespedes[j]->getNombre();
-            //     string email = auxhuespedes[j]->getEmail();
-            //     bool esFinger = auxhuespedes[j]->getEsFinger();
-            //     _huspedes[j] = new DTHuesped(nombre,email,esFinger); //no se si falta * y si huesped esta en arreglo
-            //     j++;
-            // }
-            // _huspedes[j]= nullptr;
-            // resu[i] = new DTReservaGrupal(_codigo,_chekIn,_chekOut,_estado,_costo,_habitacion,_huspedes);
+                ReservaGrupal *_ReservaGrupal = dynamic_cast<ReservaGrupal*>(this->reservas[i]);
+                int _codigo = _ReservaGrupal->getCodigo();
+                DTFecha checkin = _ReservaGrupal->getCheckIn();
+                DTFecha checkout = _ReservaGrupal->getCheckOut();
+                EstadoReserva _estado = _ReservaGrupal->getEstado();
+                float _costo = _ReservaGrupal->calcularCosto();
+                int _habitacion = _ReservaGrupal->getHabitacion()->getNumero();
+                DTHuesped* _huespedes[MAX_HUESPEDES];
+                Huesped** auxhuespedes = _ReservaGrupal->getHuespedes();
+                int j = 0;
+                while (auxhuespedes[j] != nullptr){
+                     string nombre = auxhuespedes[j]->getNombre();
+                     string email = auxhuespedes[j]->getEmail();
+                     bool esFinger = auxhuespedes[j]->getEsFinger();
+                     _huespedes[j] = new DTHuesped(nombre,email,esFinger);
+                     j++;
+                }
+                _huespedes[j]= nullptr;
+                resu[i]= new DTReservaGrupal(_codigo,checkin,checkout,_estado,_costo,_habitacion,_huespedes);
             }else{
                 ReservaIndividual *_ReservaIndividual = dynamic_cast<ReservaIndividual*>(this->reservas[i]);
                 int _codigo = _ReservaIndividual->getCodigo();
                 DTFecha checkin = _ReservaIndividual->getCheckIn();
                 DTFecha checkout = _ReservaIndividual->getCheckOut();
-                //DTFecha *checkInNuevo = new DTFecha(checkin.getDia(),checkin.getMes(),checkin.getAnio());
-                //DTFecha *checkOutNuevo = new DTFecha(_ReservaIndividual->getCheckOut());
                 EstadoReserva _estado = _ReservaIndividual->getEstado();
                 float _costo = _ReservaIndividual->calcularCosto();
                 int _habitacion = _ReservaIndividual->getHabitacion()->getNumero();
@@ -163,6 +169,7 @@ DTReserva** Sistema::obtenerReservas(DTFecha fecha,int& cantReservas){
         }
         i++;
     }
+    resu[i] = nullptr;
     return resuN;
 };
 

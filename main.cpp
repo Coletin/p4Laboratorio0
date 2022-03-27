@@ -26,7 +26,6 @@ char nom_comando[MAX_PALABRA];
   bool salir = false;
   while (!salir) {
     try{
-    system("cls");
     printf("1.Agregar Huesped.\n");
     printf("2.Agregar Habitacion.\n");
     printf("3.Obtener Huespedes.\n");
@@ -64,7 +63,6 @@ char nom_comando[MAX_PALABRA];
       leerChars(nom_comando);
       bool esFinger = nom_comando[0] == '1';
       s.agregarHuesped(nombre, email, esFinger);
-      system("pause");
 
     } else if (!strcmp(nom_comando, "2")) { //agregar habitacion
      
@@ -82,7 +80,6 @@ char nom_comando[MAX_PALABRA];
       leerChars(nom_comando);
       sscanf(nom_comando,"%d",&capacidad);
       s.agregarHabitacion(numero, precio, capacidad);
-      system("pause");
     } else if (!strcmp(nom_comando, "3")) { //obtener huespedes
       
       printf("3.Obtener Huespedes.\n");
@@ -92,10 +89,8 @@ char nom_comando[MAX_PALABRA];
         //cout << numero;
         huespedes[i]->toString();
       }
-      system("pause");
 
     } else if (!strcmp(nom_comando, "4")) { //obtener habitaciones
-      system("cls");
       printf("4.Obtener Habitaciones.\n");
       int numero = 0;
       DTHabitacion** habitaciones = s.obtenerHabitaciones(numero);
@@ -103,12 +98,11 @@ char nom_comando[MAX_PALABRA];
         //cout << numero;
         habitaciones[i]->toString();
       }
-      system("pause");
     } else if (!strcmp(nom_comando, "5")) { //registrar reserva
       printf("5.Registrar Reserva.\n");
-      int codigo, habitacion, dia, mes, ano, cantidad;
+      int codigo, habitacion, cantidad;
       string email;
-      DTFecha *desde, *hasta;
+      DTFecha desde, hasta;
       EstadoReserva estado = EstadoReserva::Abierta;
       DTReserva *res = nullptr;
 
@@ -117,62 +111,55 @@ char nom_comando[MAX_PALABRA];
       if(!s.existeHuesped(email))
         throw std::invalid_argument( "No se encontro el cliente asociado al email [" + email + "]" );
 
-      cout << "habitacion: ";
+      cout << "Habitacion: ";
       cin >> habitacion;
       if(!s.existeHabitacion(habitacion))
         throw std::invalid_argument( "No se encontro la habitacion numero [" + std::to_string(habitacion) + "]" );
 
       cout << "Ingrese codigo: ";
       cin >> codigo;
-      cout << "Ingrese dia: ";
-      cin >> dia;
-      cout << "Ingrese mes: ";
-      cin >> mes;
-      cout << "Ingrese año: ";
-      cin >> ano;
-      desde = new DTFecha(dia, mes, ano);
-      cout << "Ingrese dia: ";
-      cin >> dia;
-      cout << "Ingrese mes: ";
-      cin >> mes;
-      cout << "Ingrese año: ";
-      cin >> ano;
-      hasta = new DTFecha(dia, mes, ano);
-      cout << "Reserva individual o grupal: [1-Individual 2-Grupal] ";
+      cout << "Ingrese fecha de entrada (DD/MM/AAAA): ";
+      cin >> desde;
+      cout << "Ingrese fecha de salida (DD/MM/AAAA): ";
+      cin >> hasta;
+      cout << "Ingrese la cantidad de huespedes totales: ";
       cin >> cantidad;
       if(cantidad == 1){
-        res = new DTReservaIndividual(codigo,*desde,*hasta,estado,habitacion,true);
+        res = new DTReservaIndividual(codigo,desde,hasta,estado,habitacion,true);
         s.registrarReserva(email,res); 
-      }else if(cantidad == 2){
-        //pedimos el resto de huespedes
       }else{
-
-      }
-
-      system("pause");
+        DTHuesped* huespedes[MAX_HUESPEDES];
+        Huesped* aAgregar = s.buscarHuesped(email);
+        string _nombre = aAgregar->getNombre();
+        string _email = aAgregar->getEmail();
+        bool _esFinger = aAgregar->getEsFinger();
+        huespedes[0] = new DTHuesped(_nombre, _email, _esFinger);
+        for(int i = 1; i < cantidad; i++){
+          cout << "Ingrese email del huesped ";
+          cin >> email;
+          if(!s.existeHuesped(email))
+            throw std::invalid_argument( "No se encontro el cliente asociado al email [" + email + "]" );
+          Huesped* aAgregar = s.buscarHuesped(email);
+          string _nombre = aAgregar->getNombre();
+          string _email = aAgregar->getEmail();
+          bool _esFinger = aAgregar->getEsFinger();
+          huespedes[i] = new DTHuesped(_nombre, _email, _esFinger);
+        };
+        huespedes[cantidad] = nullptr;
+        res = new DTReservaGrupal(codigo,desde,hasta,estado,habitacion,huespedes);
+        s.registrarReserva(email, res);
+      };
 
     } else if (!strcmp(nom_comando, "6")) { //obtener reserva
       
       printf("6.Obtener Reserva.\n");
       int tope = 0;
-      DTFecha *fecha = new DTFecha(1,1,1);
-      DTReserva **listareservas = s.obtenerReservas(*fecha,tope);
-      for(int i = 0; i<tope; i++){
-        //cout << (*listareservas[i]);
+      cout << "Ingrese fecha de reservas a obtener ";
+      DTFecha fecha;
+      cin >> fecha;
+      DTReserva **listareservas = s.obtenerReservas(fecha,tope);
+      for(int i = 0; i<tope;i++) cout << *listareservas[i];
 
-        // try{
-        //   DTReservaIndividual *individual = dynamic_cast<DTReservaIndividual*>(listareservas[i]);
-        //   cout << individual;
-        // }catch(...)
-        // {}
-        // try{
-        //     DTReservaGrupal *grupal = dynamic_cast<DTReservaGrupal*>(listareservas[i]);
-        //     cout << grupal;
-        // }catch(...)
-        // {}
-        
-      }
-      system("pause");
 
     } else if (!strcmp(nom_comando, "7")) { //salir
       salir = true;
@@ -181,11 +168,9 @@ char nom_comando[MAX_PALABRA];
 
     } else { //no reconocido
       printf("Comando no reconocido.\n");
-       system("pause");
     }
     }catch(const std::invalid_argument& ex){
       cout << ex.what();  
-      system("pause");
     }    
   }
 }
