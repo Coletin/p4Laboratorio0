@@ -114,15 +114,15 @@ bool Sistema::existeHabitacion(int _numero){
     return contador < this->topeHabitaciones;
 }
 
-DTReserva** Sistema::obtenerReservas(DTFecha fecha,int& cantReservas){
+DTReserva** Sistema::obtenerReservas(DTFecha& fecha,int& cantReservas){
     cantReservas=0;
     DTReserva** resu = new DTReserva*[this->topeReservas + 1];
     //DTReserva** resuN = resu;
     int i = 0;
     //cout << this->reservas[0]->calcularCosto();
-    while (i < this->topeReservas && this->reservas[i] != nullptr){
+    while (i < this->topeReservas){
         if(this->reservas[i]->getCheckIn() == fecha){
-            if(dynamic_cast<ReservaGrupal*>(reservas[i]) != 0){
+            if(dynamic_cast<ReservaGrupal*>(this->reservas[i]) != 0){
                 ReservaGrupal *_ReservaGrupal = dynamic_cast<ReservaGrupal*>(this->reservas[i]);
                 int _codigo = _ReservaGrupal->getCodigo();
                 DTFecha checkin = _ReservaGrupal->getCheckIn();
@@ -130,7 +130,7 @@ DTReserva** Sistema::obtenerReservas(DTFecha fecha,int& cantReservas){
                 EstadoReserva _estado = _ReservaGrupal->getEstado();
                 float _costo = _ReservaGrupal->calcularCosto();
                 int _habitacion = _ReservaGrupal->getHabitacion()->getNumero();
-                DTHuesped** _huespedes = new DTHuesped*[cantHuespedes]; //TODO obtener la cantidad actual de huespedes de la reserva
+                DTHuesped** _huespedes = new DTHuesped*[this->cantHuespedes]; //TODO obtener la cantidad actual de huespedes de la reserva
                 Huesped** auxhuespedes = _ReservaGrupal->getHuespedes();
                 int j = 0;
                 while (auxhuespedes[j] != nullptr){
@@ -141,7 +141,7 @@ DTReserva** Sistema::obtenerReservas(DTFecha fecha,int& cantReservas){
                      j++;
                 }
                 _huespedes[j]= nullptr;
-                resu[i]= new DTReservaGrupal(_codigo,checkin,checkout,_estado,_costo,_habitacion,_huespedes );
+                resu[cantReservas]= new DTReservaGrupal(_codigo,checkin,checkout,_estado,_costo,_habitacion,_huespedes );
             }else{
                 ReservaIndividual *_ReservaIndividual = dynamic_cast<ReservaIndividual*>(this->reservas[i]);
                 int _codigo = _ReservaIndividual->getCodigo();
@@ -151,13 +151,13 @@ DTReserva** Sistema::obtenerReservas(DTFecha fecha,int& cantReservas){
                 float _costo = _ReservaIndividual->calcularCosto();
                 int _habitacion = _ReservaIndividual->getHabitacion()->getNumero();
                 bool _pagado = _ReservaIndividual->getPagado();
-                resu[i]= new DTReservaIndividual(_codigo,checkin,checkout,_estado,_costo,_habitacion,_pagado);
+                resu[cantReservas]= new DTReservaIndividual(_codigo,checkin,checkout,_estado,_costo,_habitacion,_pagado);
             }
             cantReservas ++;
         }
-        i++;
+            i++;
     }
-    resu[i] = nullptr;
+    resu[cantReservas] = nullptr;
     return resu;
 };
 

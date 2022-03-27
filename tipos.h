@@ -69,8 +69,8 @@ class DTReserva{
         float costo;
         int habitacion;
     public: 
-        DTReserva(int,DTFecha,DTFecha,enum EstadoReserva,float,int);
-        DTReserva(int,DTFecha,DTFecha,enum EstadoReserva,int);
+        DTReserva(int,DTFecha&,DTFecha&,enum EstadoReserva,float,int);
+        DTReserva(int,DTFecha&,DTFecha&,enum EstadoReserva,int);
         int getCodigo();
         DTFecha getchekIn(); 
         DTFecha getchekOut();
@@ -86,8 +86,8 @@ class DTReservaIndividual : public DTReserva{
     bool pagado;
  public: 
     //orden:codigo,checkIn,checkOut,estadoReserva,costo,habitacion,pago
-    DTReservaIndividual(int,DTFecha,DTFecha,enum EstadoReserva,float,int,bool);
-    DTReservaIndividual(int,DTFecha,DTFecha,enum EstadoReserva,int,bool);
+    DTReservaIndividual(int,DTFecha&,DTFecha&,enum EstadoReserva,float,int,bool);
+    DTReservaIndividual(int,DTFecha&,DTFecha&,enum EstadoReserva,int,bool);
     bool getPagado(); 
     virtual void operacion();
 };
@@ -97,8 +97,8 @@ class DTReservaGrupal : public DTReserva{
     DTHuesped** huespedes;
  public: 
     //orden:codigo,checkIn,checkOut,estadoReserva,costo,habitacion,huespedes
-    DTReservaGrupal(int,DTFecha ,DTFecha ,EstadoReserva,float,int,DTHuesped**);
-    DTReservaGrupal(int,DTFecha ,DTFecha ,EstadoReserva,int,DTHuesped**);
+    DTReservaGrupal(int,DTFecha& ,DTFecha& ,EstadoReserva,float,int,DTHuesped**);
+    DTReservaGrupal(int,DTFecha& ,DTFecha& ,EstadoReserva,int,DTHuesped**);
     DTHuesped** getHuespedes(); 
     virtual void operacion();
 };

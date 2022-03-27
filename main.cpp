@@ -17,7 +17,7 @@ char leerChar() {
 }
 typedef char *ArregloChars; // arreglo de char
 void leerChars(ArregloChars cs) { scanf("%s", cs); }
-
+DTFecha estandar(1,1,1);
 
 int main() {
 char nom_comando[MAX_PALABRA];
@@ -102,26 +102,50 @@ char nom_comando[MAX_PALABRA];
       printf("5.Registrar Reserva.\n");
       int codigo, habitacion, cantidad;
       string email;
-      DTFecha desde, hasta;
+      DTFecha desde(1,1,1), hasta(1,1,1);
       EstadoReserva estado = EstadoReserva::Abierta;
       DTReserva *res = nullptr;
 
       cout << "Ingrese email del huesped principal: ";
       cin >> email;
       if(!s.existeHuesped(email))
-        throw std::invalid_argument( "No se encontro el cliente asociado al email [" + email + "]" );
+        throw std::invalid_argument( "No se encontro el cliente asociado al email [" + email + "]" + "\n" );
 
       cout << "Habitacion: ";
       cin >> habitacion;
       if(!s.existeHabitacion(habitacion))
-        throw std::invalid_argument( "No se encontro la habitacion numero [" + std::to_string(habitacion) + "]" );
+        throw std::invalid_argument( "No se encontro la habitacion numero [" + std::to_string(habitacion) + "]" + "\n" );
 
       cout << "Ingrese codigo: ";
       cin >> codigo;
-      cout << "Ingrese fecha de entrada (DD/MM/AAAA): ";
-      cin >> desde;
-      cout << "Ingrese fecha de salida (DD/MM/AAAA): ";
-      cin >> hasta;
+      bool error = true;
+      while(error){
+        error = false;
+        desde = estandar;
+        hasta = estandar;
+        while(desde == estandar){
+            try {
+            cout << "Ingrese fecha de entrada (DD/MM/AAAA): ";
+            cin >> desde;
+        }
+          catch (const invalid_argument& e){
+            cerr << e.what() << endl;
+        };
+        };
+        while(hasta == estandar){
+            try {
+            cout << "Ingrese fecha de salida (DD/MM/AAAA): ";
+            cin >> hasta;
+        }
+          catch (const invalid_argument& e){
+            cerr << e.what() << endl;
+          };
+        };
+        if(desde > hasta){
+            cout << ( "La fecha de entrada no puede ser mayor a la de salida \n" );
+            error = true;
+        };
+      };
       cout << "Ingrese la cantidad de huespedes totales: ";
       cin >> cantidad;
       if(cantidad == 1){
@@ -138,7 +162,8 @@ char nom_comando[MAX_PALABRA];
           cout << "Ingrese email del huesped ";
           cin >> email;
           if(!s.existeHuesped(email))
-            throw std::invalid_argument( "No se encontro el cliente asociado al email [" + email + "]" );
+            throw std::invalid_argument( "No se encontro el cliente asociado al email [" + email + "]" + "\n" );
+
           Huesped* aAgregar = s.buscarHuesped(email);
           string _nombre = aAgregar->getNombre();
           string _email = aAgregar->getEmail();
@@ -154,12 +179,18 @@ char nom_comando[MAX_PALABRA];
       
       printf("6.Obtener Reserva.\n");
       int tope = 0;
-      cout << "Ingrese fecha de reservas a obtener ";
-      DTFecha fecha;
-      cin >> fecha;
+      DTFecha fecha(1,1,1);
+      while(fecha == estandar){
+          try {
+          cout << "Ingrese fecha de reservas a obtener (DD/MM/AAAA): ";
+          cin >> fecha;
+       }
+        catch (const invalid_argument& e){
+          cerr << e.what() << endl;
+       };
+      };
       DTReserva **listareservas = s.obtenerReservas(fecha,tope);
       for(int i = 0; i<tope;i++) cout << *listareservas[i];
-
 
     } else if (!strcmp(nom_comando, "7")) { //salir
       salir = true;
