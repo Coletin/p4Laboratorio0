@@ -116,11 +116,11 @@ bool Sistema::existeHabitacion(int _numero){
 
 DTReserva** Sistema::obtenerReservas(DTFecha fecha,int& cantReservas){
     cantReservas=0;
-    DTReserva** resu = new DTReserva*[topeReservas];
+    DTReserva** resu = new DTReserva*[this->topeReservas + 1];
     //DTReserva** resuN = resu;
     int i = 0;
     //cout << this->reservas[0]->calcularCosto();
-    while (i < topeReservas && this->reservas[i] != nullptr){
+    while (i < this->topeReservas && this->reservas[i] != nullptr){
         if(this->reservas[i]->getCheckIn() == fecha){
             if(dynamic_cast<ReservaGrupal*>(reservas[i]) != 0){
                 ReservaGrupal *_ReservaGrupal = dynamic_cast<ReservaGrupal*>(this->reservas[i]);
@@ -162,7 +162,7 @@ DTReserva** Sistema::obtenerReservas(DTFecha fecha,int& cantReservas){
 };
 
 DTHuesped** Sistema::obtenerHuespedes(int& cantHuespedes){
-    DTHuesped** respuesta = new DTHuesped*[cantHuespedes];
+    DTHuesped** respuesta = new DTHuesped*[this->cantHuespedes + 1];
     //DTHuesped** respuestaN = respuesta;
     respuesta[this->cantHuespedes] = nullptr;
     cantHuespedes = this->cantHuespedes;
@@ -176,7 +176,7 @@ DTHuesped** Sistema::obtenerHuespedes(int& cantHuespedes){
 };
 
 DTHabitacion** Sistema::obtenerHabitaciones(int& cantHabitaciones){
-    DTHabitacion** respuesta = new DTHabitacion*[topeHabitaciones];
+    DTHabitacion** respuesta = new DTHabitacion*[this->topeHabitaciones + 1];
     //DTHabitacion** respuestaN = respuesta;
     respuesta[this->topeHabitaciones] = nullptr;
     cantHabitaciones = this->topeHabitaciones;

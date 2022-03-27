@@ -153,7 +153,7 @@ bool DTHuesped::getEsFinger(){
 };
 
 void DTHuesped::toString(){
-    cout << "[nombre: " << this->getNombre() << "; email: " << this->getEmail() << "; Es Finger?: " << this->getEsFinger() << "]" ;
+    cout << "[nombre: " << this->getNombre() << "; email: " << this->getEmail() << "; Es Finger?: " << this->getEsFinger() << "]" << endl;
 };
 
 DTHabitacion::DTHabitacion(){
@@ -173,7 +173,7 @@ float DTHabitacion::getPrecio(){return this->precio;};
 int DTHabitacion::getCapacidad(){return this->capacidad;};
 
 void DTHabitacion::toString(){
-    cout << "[numero: " << this->getNumero() << "; capacidad: " << this->getCapacidad() << "; precio: " << this->getPrecio() << "]" ;
+    cout << "[numero: " << this->getNumero() << "; capacidad: " << this->getCapacidad() << "; precio: " << this->getPrecio() << "]" << endl ;
 };
 
 DTReserva::DTReserva(int _codigo,DTFecha _checkIn,DTFecha _checkOut,EstadoReserva _estado,float _costo,int _habitacion){
