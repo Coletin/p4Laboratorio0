@@ -2,7 +2,7 @@ CFLAGS=-c
 CC = g++ # gcc -x c 
 
 all: main.cpp
-	$(CC) -Wall -Werror -I$Clases main.cpp tipos.cpp Clases/*.cpp -std=gnu++0x -o FingVMB -g # -DNDEBUG 
+	$(CC) main.cpp tipos.cpp Clases/*.cpp -std=gnu++0x -o FingVMB # -DNDEBUG
 
 # clean:
 # 	$(RM) *.o saludo core
