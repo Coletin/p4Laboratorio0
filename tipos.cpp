@@ -279,8 +279,10 @@ ostream& operator<<(ostream& o, DTReservaGrupal& rg){
     int i = 0;
     while(rg.getHuespedes()[i]!=nullptr){
         o << rg.getHuespedes()[i]->getNombre() << " - " << rg.getHuespedes()[i]->getEmail();
-        if(rg.getHuespedes()[i]->getEsFinger() && i == 0) o << " - es Finger";
-        else if(i == 0) o << " - no es Finger";
+        if(rg.getHuespedes()[i]->getEsFinger()) 
+            o << " - es Finger";
+        else 
+            o << " - no es Finger";
         o << "," << endl << "           ";
         i++;
     }

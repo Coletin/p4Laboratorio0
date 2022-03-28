@@ -9,6 +9,10 @@ Sistema::Sistema(){
     this->reservas[0]=nullptr;
 };
 
+int Sistema::getCantHuespedes(){
+    return this->cantHuespedes;
+};
+
 void Sistema::agregarHuesped(string nombre, string email, bool esFinger){
     if(this->existeHuesped(email)){
         throw std::invalid_argument("Ya existe el huesped.");
@@ -20,9 +24,9 @@ void Sistema::agregarHuesped(string nombre, string email, bool esFinger){
 
 void Sistema::agregarHabitacion(int numero, float precio, int capacidad){
     if(this->topeHabitaciones == MAX_HABITACIONES)
-        throw std::invalid_argument( "Se alcanzó la cantidad máxima de huéspedes" );
+        throw std::invalid_argument( "Se alcanzo la cantidad maxima de huespedes" );
     if(numero < 0)
-        throw std::invalid_argument( "El numero de habitación debe ser positivo" );
+        throw std::invalid_argument( "El numero de habitacion debe ser positivo" );
     if(precio < 0)
         throw std::invalid_argument( "El precio no debe ser negativo" );
     if(capacidad < 0)
@@ -33,7 +37,7 @@ void Sistema::agregarHabitacion(int numero, float precio, int capacidad){
         busqueda ++;
     }
     if(busqueda < topeHabitaciones)
-        throw std::invalid_argument( "Ya existe una habitación con el número indicado" );
+        throw std::invalid_argument( "Ya existe una habitacion con el numero indicado" );
     //llegamos hasta aca entonces podemos agregar OK
     Habitacion* habitacionAgregar = new Habitacion(numero, precio, capacidad);
     this->habitaciones[this->topeHabitaciones] = habitacionAgregar;
@@ -48,13 +52,13 @@ void Sistema::registrarReserva(string email,DTReserva* reserva){
         huespedEnSistema++;
     }
     if(huespedEnSistema > this->cantHuespedes)
-        throw std::invalid_argument("No existe un huésped registrado con el email");
+        throw std::invalid_argument("No existe un huesped registrado con el email");
     else{
         while((habitacionEnSistema <= this->topeHabitaciones) && (reserva->getHabitacion() != habitaciones[habitacionEnSistema]->getNumero())){
             habitacionEnSistema++;
         }
         if(habitacionEnSistema > topeHabitaciones){
-            throw std::invalid_argument("no existe una habitación registrada en el sistema con el número indicado");
+            throw std::invalid_argument("no existe una habitacion registrada en el sistema con el numero indicado");
         }else{
             int codigo= reserva->getCodigo();
             DTFecha cIn= reserva->getchekIn();
