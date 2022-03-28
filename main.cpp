@@ -57,6 +57,7 @@ char nom_comando[MAX_PALABRA];
       printf("1.Agregar Huesped.\n");
       cout << "Ingrese el nombre: ";
       std::string nombre;
+      cin.ignore();
       cin.clear();
       cin.sync();
       std::getline(cin,nombre);
