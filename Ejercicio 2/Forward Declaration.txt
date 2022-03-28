@@ -1,8 +1,0 @@
-FORWARD DECLARATION
-
-Una forward declaration es una declaración de un identificador (que se denota en el caso planteado en el ejercicio una clase, pero puede aplicarse a entidades,
-tipos, variables,constantes o funciones) para la cual  aún no se ha dado una definición completa . Se requiere que un compilador conozca ciertas propiedades de un identificador
-,pero no otros detalles, como el valor particular que contiene (en caso de variables o constantes) o definición (en el caso de funciones) o bien puede ser el constructor por 
-defecto en el caso de una clase.
-
-Esto es particularmente útil para compiladores de un solo paso y compilación separada, similar a C++, donde vamos recorriendo linea a linea.

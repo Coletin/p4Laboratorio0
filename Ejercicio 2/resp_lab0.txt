@@ -1,0 +1,24 @@
+1)Cuáles son las dependencias circulares que fueron necesarias solucionar para que el
+programa compile?
+Las clases que nos generaron problemas de dependencia circular fueron la B y C.
+Para solucionar el problema, realizamos una definición inicial de dichas clases para que luego sean reconocidas por la clase A
+evitando asi que se realice una llamada recurrente.
+Ejemplo:
+A precisa de B, entonces defino a B primero.
+B precisa de A, entonces defino a A primero.
+Como lo soluciono? 
+    1-Realizo una definicion inicial de B. 
+    2-Luego defino de forma completa a A.
+    3-Finalmente defino de forma completa a B.
+El mismo ejemplo utilizamos para A,B y C.
+
+
+2)Que es una forward declaration?
+FORWARD DECLARATION
+
+Una forward declaration es una declaración de un identificador (que se denota en el caso planteado en el ejercicio una clase, pero puede aplicarse a entidades,
+tipos, variables,constantes o funciones) para la cual  aún no se ha dado una definición completa . Se requiere que un compilador conozca ciertas propiedades de un identificador
+,pero no otros detalles, como el valor particular que contiene (en caso de variables o constantes) o definición (en el caso de funciones) o bien puede ser el constructor por 
+defecto en el caso de una clase.
+
+Esto es particularmente útil para compiladores de un solo paso y compilación separada, similar a C++, donde vamos recorriendo linea a linea.
